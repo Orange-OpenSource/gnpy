@@ -27,3 +27,26 @@ This example demonstrates how GNPy can be used to check the expected SNR at the 
 
 GNPy can do much more, including acting as a Path Computation Engine, tracking bandwidth requests, or advising the SDN controller about a best possible path through a large DWDM network.
 Learn more about this [in the documentation](https://gnpy.readthedocs.io/).
+
+## REST API (experimental)
+
+`gnpy` provides an experimental api for requesting several paths at once. It is based on Flask server.
+You can run it through command line or Docker.
+
+```
+
+     $ gnpy-rest
+
+```
+
+```
+    $ docker run -p 8080:8080 -dit xxxx gnpy-rest
+
+```
+After starting the api server, you can lauch a request
+
+
+```
+    $ curl -v -X POST -H "Content-Type: application/json" -d @<PATH_TO_JSON_REQUEST_FILE> http://localhost:8080/api/v1/path-computation
+
+```
