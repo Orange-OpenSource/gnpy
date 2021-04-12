@@ -243,6 +243,7 @@ def test_roadm_target_power(prev_node_type, effective_pch_out_db, power_dbm):
               'format': '',
               'path_bandwidth': 100e9,
               'effective_freq_slot': None,
+              'blocking_reason': None,
               }
     trx_params = trx_mode_params(equipment)
     params.update(trx_params)
