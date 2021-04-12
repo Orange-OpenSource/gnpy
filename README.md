@@ -40,7 +40,7 @@ You can run it through command line or Docker.
 ```
 
 ```
-    $ docker run -p 8080:8080 -dit emmanuelledelfour/gnpy-experimental:candi-1.0 gnpy-rest
+    $ docker run -p 8080:8080 -dit emmanuelledelfour/gnpy-experimental:candi-1.1 gnpy-rest
 
 ```
 
