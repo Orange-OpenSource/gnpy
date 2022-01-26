@@ -1,13 +1,8 @@
 # -*- coding: utf-8 -*-
-import json
 import logging
-import os
 import uuid
 
 import gnpy.core.ansi_escapes as ansi_escapes
-from gnpy.api.exception.path_computation_error import PathComputationError
-from gnpy.api.service import config_service
-from gnpy.api.service.encryption_service import EncryptionService
 from gnpy.core.network import build_network
 from gnpy.core.utils import lin2db, automatic_nch
 from gnpy.tools.json_io import requests_from_json, disjunctions_from_json, network_to_json
@@ -21,9 +16,6 @@ _logger = logging.getLogger(__name__)
 
 class PathRequestService:
 
-    def __init__(self, encryption_service: EncryptionService):
-        self.encryption = encryption_service
-
     def path_requests_run(self, service, network, equipment):
         # Build the network once using the default power defined in SI in eqpt config
         # TODO power density: db2linp(ower_dbm": 0)/power_dbm": 0 * nb channels as defined by
@@ -34,9 +26,6 @@ class PathRequestService:
                                                  equipment['SI']['default'].f_max, equipment['SI']['default'].spacing))
         build_network(network, equipment, p_db, p_total_db)
         path_computation_identifier = str(uuid.uuid4())
-        autodesign_dir = config_service.get_autodesign_dir()
-        with(open(os.path.join(autodesign_dir, '.'.join([path_computation_identifier, 'json'])), 'wb')) as file:
-            file.write(self.encryption.encrypt(json.dumps(network_to_json(network)).encode()))
         oms_list = build_oms_list(network, equipment)
         rqs = requests_from_json(service, equipment)
 
@@ -75,26 +64,3 @@ class PathRequestService:
 
         pth_assign_spectrum(pths, rqs, oms_list, reversed_pths)
         return propagatedpths, reversed_propagatedpths, rqs, path_computation_identifier
-
-    def get_autodesign(self, path_computation_id):
-        """
-        Get the autodesign with id topology_id
-        @param path_computation_id:
-        @return: the autodesign in json format
-        """
-        autodesign_dir = config_service.get_autodesign_dir()
-        autodesign_file = os.path.join(autodesign_dir, '.'.join([path_computation_id, 'json']))
-        if not os.path.exists(autodesign_file):
-            raise PathComputationError('Autodesign with id {} does not exist '.format(path_computation_id))
-        with(open(autodesign_file, 'rb')) as file:
-            return json.loads(self.encryption.decrypt(file.read()))
-
-    def delete_autodesign(self, path_computation_id: str):
-        """
-        Delete autodesign with id equipment_id
-        @param path_computation_id:
-        """
-        autodesign_dir = config_service.get_autodesign_dir()
-        autodesign_file = os.path.join(autodesign_dir, '.'.join([path_computation_id, 'json']))
-        if os.path.exists(autodesign_file):
-            os.remove(autodesign_file)
