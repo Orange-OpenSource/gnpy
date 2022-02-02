@@ -1,0 +1,33 @@
+include:
+  - project: 'to-be-continuous/python'
+    ref: '3.2.1'
+    file: '/templates/gitlab-ci-python.yml'
+  - template: Security/SAST.gitlab-ci.yml
+
+variables:
+  PROD_REF: '/^experimental/tpce$/'
+  PYTHON_IMAGE: python:3.8
+  RELEASE_VERSION_PART: 'patch'
+  PYTHON_FORCE_PACKAGE : 'true'
+  PYTHON_PUBLISH_ENABLED: 'true'
+
+stages:
+  - build
+  - test
+  - package-build
+  - publish
+sast:
+  stage: test
+
+# override template job as it seems buggued
+py-release:
+  script:
+    - git config --global user.email "$GITLAB_USER_EMAIL"
+    - git config --global user.name "$GITLAB_USER_LOGIN"
+    - git checkout -B $CI_BUILD_REF_NAME
+    - pip install bumpversion
+    - bumpversion ${RELEASE_VERSION_PART} --verbose
+    - git_url_base=`echo ${CI_REPOSITORY_URL} | cut -d\@ -f2`
+    - git push https://${RELEASE_USERNAME}:${RELEASE_ACCESS_TOKEN}@${git_url_base} --tags
+    - git push https://${RELEASE_USERNAME}:${RELEASE_ACCESS_TOKEN}@${git_url_base} $CI_BUILD_REF_NAME
+
