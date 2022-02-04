@@ -61,7 +61,7 @@ def main():
     _init_logger()
     _init_app()
     FlaskInjector(app=app, modules=[_configure])
-    app.run(host='0.0.0.0', port=8080)
+    app.run(host='0.0.0.0', port=8008)
 
 
 if __name__ == '__main__':
