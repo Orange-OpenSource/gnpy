@@ -454,6 +454,7 @@ def requests_from_json(json_data, equipment):
     """Extract list of requests from data parsed from JSON"""
     requests_list = []
 
+    print(json_data['path-request'])
     for req in json_data['path-request']:
         # init all params from request
         params = {}
@@ -501,15 +502,13 @@ def requests_from_json(json_data, equipment):
         except KeyError:
             params['nb_channel'] = automatic_nch(f_min, f_max_from_si, params['spacing'])
         params['effective_freq_slot'] = req['path-constraints']['te-bandwidth'].get('effective-freq-slot', [None])[0]
-        params['blocking_reason'] = _check_one_request(params, f_max_from_si)
         try:
             params['path_bandwidth'] = req['path-constraints']['te-bandwidth']['path_bandwidth']
         except KeyError:
             pass
-        _check_one_request(params, f_max_from_si)
+        params['blocking_reason'] =  _check_one_request(params, f_max_from_si)
         requests_list.append(PathRequest(**params))
     return requests_list
-
 
 def _check_one_request(params, f_max_from_si):
     """Checks that the requested parameters are consistant (spacing vs nb channel vs transponder mode...)"""
