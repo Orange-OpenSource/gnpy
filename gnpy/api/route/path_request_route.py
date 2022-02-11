@@ -20,13 +20,14 @@ _examples_dir = Path(__file__).parent.parent.parent / 'example-data'
 @app.route(PATH_COMPUTATION_BASE_PATH, methods=['POST'])
 def compute_path(path_request_service: PathRequestService):
     data = request.json
-    service = data['gnpy-api:service']
-    if 'gnpy-api:topology' in data:
-        topology = data['gnpy-api:topology']
+    request_data = data["request"]
+    service = request_data['service']
+    if 'topology' in request_data:
+        topology = request_data['topology']
     else:
         raise TopologyError('No topology found in request')
-    # with open(os.path.join(_examples_dir, 'eqpt_config.json')) as eqpt_file:
-    with open(os.path.join(_examples_dir, 'fake-candi-demo-equipment-corrected.json')) as eqpt_file:
+    #with open(os.path.join(_examples_dir, 'fake-candi-demo-equipment-corrected.json')) as eqpt_file:
+    with open(os.path.join(_examples_dir, 'eqpt_config_openroadm_ver5.json')) as eqpt_file:
         equipment = json.load(eqpt_file)
         equipment = _equipment_from_json(equipment, os.path.join(_examples_dir,'std_medium_gain_advanced_config.json'))
         print(equipment)

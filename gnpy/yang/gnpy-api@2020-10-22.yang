@@ -30,15 +30,11 @@ module gnpy-api {
       "YANG model for api input for path computation with gnpy";
   }
 
+  container request {
     container service {
       description
         "Describe the service file to connect to gnpy";
       uses gnpypc:service;
-    }
-    container result {
-     uses gnpypc:result;
-     description
-     "Describe the response object to gnpy";
     }
     container topology {
       description
@@ -50,4 +46,5 @@ module gnpy-api {
         "Describe the equipment library to connect to gnpy";
       uses gnpyeqpt:eqpt;
     }
+  }
 }

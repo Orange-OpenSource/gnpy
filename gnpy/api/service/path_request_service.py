@@ -17,9 +17,16 @@ _logger = logging.getLogger(__name__)
 class PathRequestService:
 
     def path_requests_run(self, service, network, equipment):
+        # Sort the list of rout in the routeObjectIncludeExclude
+        path_request = service.get('path-request')
+        for path in path_request:
+            if path.get('explicit-route-objects') and path.get('explicit-route-objects').get('route-object-include-exclude'):
+                path.get('explicit-route-objects').get('route-object-include-exclude').sort(key=lambda n: n['index'])
+
         # Build the network once using the default power defined in SI in eqpt config
         # TODO power density: db2linp(ower_dbm": 0)/power_dbm": 0 * nb channels as defined by
         # spacing, f_min and f_max
+
         p_db = equipment['SI']['default'].power_dbm
 
         p_total_db = p_db + lin2db(automatic_nch(equipment['SI']['default'].f_min,
@@ -27,6 +34,7 @@ class PathRequestService:
         build_network(network, equipment, p_db, p_total_db)
         path_computation_identifier = str(uuid.uuid4())
         oms_list = build_oms_list(network, equipment)
+
         rqs = requests_from_json(service, equipment)
 
         # check that request ids are unique. Non unique ids, may

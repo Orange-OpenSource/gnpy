@@ -556,4 +556,10 @@ module gnpy-path-computation-simplified {
        }
      }
    }
+
+   container result {
+     uses gnpypc:result;
+     description
+       "Describe the response object to gnpy";
+  }
 }

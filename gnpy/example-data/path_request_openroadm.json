@@ -1,0 +1,608 @@
+{
+    "request": {
+        "service": {
+            "path-request": [
+                {
+                    "request-id": "0",
+                    "source": "127.0.0.11",
+                    "destination": "127.0.0.51",
+                    "dst-tp-id": "127.0.0.51",
+                    "bidirectional": false,
+                    "src-tp-id": "127.0.0.11",
+                    "path-constraints": {
+                        "te-bandwidth": {
+                            "technology": "flexi-grid",
+                            "trx_type": "OpenROADM MSA ver. 5.0",
+                            "trx_mode": "100G",
+                            "spacing": 5.00E+10,
+                            "path_bandwidth": 1.00E+11,
+                            "effective-freq-slot": [
+                                {
+                                    "N": 120,
+                                    "M": 4
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        "topology": {
+            "elements": [
+                {
+                    "uid": "243.0.0.14",
+                    "metadata": {
+                        "location": {
+                            "region": "N/A",
+                            "longitude": 0.0,
+                            "latitude": 0.0,
+                            "city": "N/A"
+                        }
+                    },
+                    "type_variety": "SSMF",
+                    "params": {
+                        "length_units": "km",
+                        "con_out": 0.0,
+                        "length": 60.0,
+                        "loss_coef": 0.21000000000000001,
+                        "att_in": 0.0,
+                        "con_in": 0.0
+                    },
+                    "type": "Fiber"
+                },
+                {
+                    "uid": "243.0.0.13",
+                    "metadata": {
+                        "location": {
+                            "region": "N/A",
+                            "longitude": 0.0,
+                            "latitude": 0.0,
+                            "city": "N/A"
+                        }
+                    },
+                    "type_variety": "SSMF",
+                    "params": {
+                        "length_units": "km",
+                        "con_out": 0.0,
+                        "length": 100.0,
+                        "loss_coef": 0.21,
+                        "att_in": 0.0,
+                        "con_in": 0.0
+                    },
+                    "type": "Fiber"
+                },
+                {
+                    "uid": "243.0.0.10",
+                    "metadata": {
+                        "location": {
+                            "region": "N/A",
+                            "longitude": 0.0,
+                            "latitude": 0.0,
+                            "city": "N/A"
+                        }
+                    },
+                    "type_variety": "SSMF",
+                    "params": {
+                        "length_units": "km",
+                        "con_out": 0.0,
+                        "length": 100.0,
+                        "loss_coef": 0.21,
+                        "att_in": 0.0,
+                        "con_in": 0.0
+                    },
+                    "type": "Fiber"
+                },
+                {
+                    "uid": "243.0.0.12",
+                    "metadata": {
+                        "location": {
+                            "region": "N/A",
+                            "longitude": 0.0,
+                            "latitude": 0.0,
+                            "city": "N/A"
+                        }
+                    },
+                    "type_variety": "SSMF",
+                    "params": {
+                        "length_units": "km",
+                        "con_out": 0.0,
+                        "length": 60.0,
+                        "loss_coef": 0.21000000000000001,
+                        "att_in": 0.0,
+                        "con_in": 0.0
+                    },
+                    "type": "Fiber"
+                },
+                {
+                    "uid": "243.0.0.11",
+                    "metadata": {
+                        "location": {
+                            "region": "N/A",
+                            "longitude": 0.0,
+                            "latitude": 0.0,
+                            "city": "N/A"
+                        }
+                    },
+                    "type_variety": "SSMF",
+                    "params": {
+                        "length_units": "km",
+                        "con_out": 0.0,
+                        "length": 100.0,
+                        "loss_coef": 0.29,
+                        "att_in": 0.0,
+                        "con_in": 0.0
+                    },
+                    "type": "Fiber"
+                },
+                {
+                    "uid": "127.0.0.11",
+                    "metadata": {
+                        "location": {
+                            "longitude": 0.0,
+                            "region": "XPONDER-1",
+                            "latitude": 0.0
+                        }
+                    },
+                    "type": "Transceiver"
+                },
+                {
+                    "uid": "127.0.0.10",
+                    "metadata": {
+                        "location": {
+                            "longitude": 0.0,
+                            "region": "OpenROADM-1",
+                            "latitude": 0.0
+                        }
+                    },
+                    "params": {
+                        "target_pch_out_db": -20.0
+                    },
+                    "type": "Roadm"
+                },
+                {
+                    "uid": "127.0.0.31",
+                    "metadata": {
+                        "location": {
+                            "longitude": 0.0,
+                            "region": "XPONDER-3",
+                            "latitude": 0.0
+                        }
+                    },
+                    "type": "Transceiver"
+                },
+                {
+                    "uid": "127.0.0.30",
+                    "metadata": {
+                        "location": {
+                            "longitude": 0.0,
+                            "region": "OpenROADM-3",
+                            "latitude": 0.0
+                        }
+                    },
+                    "params": {
+                        "target_pch_out_db": -20.0
+                    },
+                    "type": "Roadm"
+                },
+                {
+                    "uid": "127.0.0.51",
+                    "metadata": {
+                        "location": {
+                            "longitude": 0.0,
+                            "region": "XPONDER-5",
+                            "latitude": 0.0
+                        }
+                    },
+                    "type": "Transceiver"
+                },
+                {
+                    "uid": "127.0.0.50",
+                    "metadata": {
+                        "location": {
+                            "longitude": 0.0,
+                            "region": "OpenROADM-5",
+                            "latitude": 0.0
+                        }
+                    },
+                    "params": {
+                        "target_pch_out_db": -20.0
+                    },
+                    "type": "Roadm"
+                },
+                {
+                    "uid": "243.0.0.6",
+                    "metadata": {
+                        "location": {
+                            "region": "N/A",
+                            "longitude": 0.0,
+                            "latitude": 0.0,
+                            "city": "N/A"
+                        }
+                    },
+                    "type_variety": "SSMF",
+                    "params": {
+                        "length_units": "km",
+                        "con_out": 0.0,
+                        "length": 60.0,
+                        "loss_coef": 0.21000000000000001,
+                        "att_in": 0.0,
+                        "con_in": 0.0
+                    },
+                    "type": "Fiber"
+                },
+                {
+                    "uid": "243.0.0.7",
+                    "metadata": {
+                        "location": {
+                            "region": "N/A",
+                            "longitude": 0.0,
+                            "latitude": 0.0,
+                            "city": "N/A"
+                        }
+                    },
+                    "type_variety": "SSMF",
+                    "params": {
+                        "length_units": "km",
+                        "con_out": 0.0,
+                        "length": 100.0,
+                        "loss_coef": 0.29,
+                        "att_in": 0.0,
+                        "con_in": 0.0
+                    },
+                    "type": "Fiber"
+                },
+                {
+                    "uid": "243.0.0.4",
+                    "metadata": {
+                        "location": {
+                            "region": "N/A",
+                            "longitude": 0.0,
+                            "latitude": 0.0,
+                            "city": "N/A"
+                        }
+                    },
+                    "type_variety": "SSMF",
+                    "params": {
+                        "length_units": "km",
+                        "con_out": 0.0,
+                        "length": 100.0,
+                        "loss_coef": 0.29,
+                        "att_in": 0.0,
+                        "con_in": 0.0
+                    },
+                    "type": "Fiber"
+                },
+                {
+                    "uid": "243.0.0.5",
+                    "metadata": {
+                        "location": {
+                            "region": "N/A",
+                            "longitude": 0.0,
+                            "latitude": 0.0,
+                            "city": "N/A"
+                        }
+                    },
+                    "type_variety": "SSMF",
+                    "params": {
+                        "length_units": "km",
+                        "con_out": 0.0,
+                        "length": 100.0,
+                        "loss_coef": 0.29,
+                        "att_in": 0.0,
+                        "con_in": 0.0
+                    },
+                    "type": "Fiber"
+                },
+                {
+                    "uid": "243.0.0.2",
+                    "metadata": {
+                        "location": {
+                            "region": "N/A",
+                            "longitude": 0.0,
+                            "latitude": 0.0,
+                            "city": "N/A"
+                        }
+                    },
+                    "type_variety": "SSMF",
+                    "params": {
+                        "length_units": "km",
+                        "con_out": 0.0,
+                        "length": 150.0,
+                        "loss_coef": 0.2,
+                        "att_in": 0.0,
+                        "con_in": 0.0
+                    },
+                    "type": "Fiber"
+                },
+                {
+                    "uid": "243.0.0.3",
+                    "metadata": {
+                        "location": {
+                            "region": "N/A",
+                            "longitude": 0.0,
+                            "latitude": 0.0,
+                            "city": "N/A"
+                        }
+                    },
+                    "type_variety": "SSMF",
+                    "params": {
+                        "length_units": "km",
+                        "con_out": 0.0,
+                        "length": 140.0,
+                        "loss_coef": 0.20714285714285716,
+                        "att_in": 0.0,
+                        "con_in": 0.0
+                    },
+                    "type": "Fiber"
+                },
+                {
+                    "uid": "243.0.0.1",
+                    "metadata": {
+                        "location": {
+                            "region": "N/A",
+                            "longitude": 0.0,
+                            "latitude": 0.0,
+                            "city": "N/A"
+                        }
+                    },
+                    "type_variety": "SSMF",
+                    "params": {
+                        "length_units": "km",
+                        "con_out": 0.0,
+                        "length": 100.0,
+                        "loss_coef": 0.29,
+                        "att_in": 0.0,
+                        "con_in": 0.0
+                    },
+                    "type": "Fiber"
+                },
+                {
+                    "uid": "243.0.0.8",
+                    "metadata": {
+                        "location": {
+                            "region": "N/A",
+                            "longitude": 0.0,
+                            "latitude": 0.0,
+                            "city": "N/A"
+                        }
+                    },
+                    "type_variety": "SSMF",
+                    "params": {
+                        "length_units": "km",
+                        "con_out": 0.0,
+                        "length": 60.0,
+                        "loss_coef": 0.21000000000000001,
+                        "att_in": 0.0,
+                        "con_in": 0.0
+                    },
+                    "type": "Fiber"
+                },
+                {
+                    "uid": "243.0.0.9",
+                    "metadata": {
+                        "location": {
+                            "region": "N/A",
+                            "longitude": 0.0,
+                            "latitude": 0.0,
+                            "city": "N/A"
+                        }
+                    },
+                    "type_variety": "SSMF",
+                    "params": {
+                        "length_units": "km",
+                        "con_out": 0.0,
+                        "length": 140.0,
+                        "loss_coef": 0.20714285714285716,
+                        "att_in": 0.0,
+                        "con_in": 0.0
+                    },
+                    "type": "Fiber"
+                },
+                {
+                    "uid": "127.0.0.21",
+                    "metadata": {
+                        "location": {
+                            "longitude": 0.0,
+                            "region": "XPONDER-2",
+                            "latitude": 0.0
+                        }
+                    },
+                    "type": "Transceiver"
+                },
+                {
+                    "uid": "127.0.0.20",
+                    "metadata": {
+                        "location": {
+                            "longitude": 0.0,
+                            "region": "OpenROADM-2",
+                            "latitude": 0.0
+                        }
+                    },
+                    "params": {
+                        "target_pch_out_db": -20.0
+                    },
+                    "type": "Roadm"
+                },
+                {
+                    "uid": "127.0.0.41",
+                    "metadata": {
+                        "location": {
+                            "longitude": 0.0,
+                            "region": "XPONDER-4",
+                            "latitude": 0.0
+                        }
+                    },
+                    "type": "Transceiver"
+                },
+                {
+                    "uid": "127.0.0.40",
+                    "metadata": {
+                        "location": {
+                            "longitude": 0.0,
+                            "region": "OpenROADM-4",
+                            "latitude": 0.0
+                        }
+                    },
+                    "params": {
+                        "target_pch_out_db": -20.0
+                    },
+                    "type": "Roadm"
+                }
+            ],
+            "connections": [
+                {
+                    "from_node": "127.0.0.40",
+                    "to_node": "127.0.0.41"
+                },
+                {
+                    "from_node": "127.0.0.40",
+                    "to_node": "243.0.0.1"
+                },
+                {
+                    "from_node": "243.0.0.1",
+                    "to_node": "127.0.0.30"
+                },
+                {
+                    "from_node": "127.0.0.21",
+                    "to_node": "127.0.0.20"
+                },
+                {
+                    "from_node": "127.0.0.41",
+                    "to_node": "127.0.0.40"
+                },
+                {
+                    "from_node": "127.0.0.31",
+                    "to_node": "127.0.0.30"
+                },
+                {
+                    "from_node": "127.0.0.10",
+                    "to_node": "243.0.0.2"
+                },
+                {
+                    "from_node": "243.0.0.2",
+                    "to_node": "127.0.0.30"
+                },
+                {
+                    "from_node": "127.0.0.50",
+                    "to_node": "127.0.0.51"
+                },
+                {
+                    "from_node": "127.0.0.20",
+                    "to_node": "243.0.0.3"
+                },
+                {
+                    "from_node": "243.0.0.3",
+                    "to_node": "127.0.0.30"
+                },
+                {
+                    "from_node": "127.0.0.30",
+                    "to_node": "243.0.0.4"
+                },
+                {
+                    "from_node": "243.0.0.4",
+                    "to_node": "127.0.0.40"
+                },
+                {
+                    "from_node": "127.0.0.11",
+                    "to_node": "127.0.0.10"
+                },
+                {
+                    "from_node": "127.0.0.40",
+                    "to_node": "243.0.0.5"
+                },
+                {
+                    "from_node": "243.0.0.5",
+                    "to_node": "127.0.0.50"
+                },
+                {
+                    "from_node": "127.0.0.50",
+                    "to_node": "243.0.0.6"
+                },
+                {
+                    "from_node": "243.0.0.6",
+                    "to_node": "127.0.0.20"
+                },
+                {
+                    "from_node": "127.0.0.50",
+                    "to_node": "243.0.0.7"
+                },
+                {
+                    "from_node": "243.0.0.7",
+                    "to_node": "127.0.0.40"
+                },
+                {
+                    "from_node": "127.0.0.50",
+                    "to_node": "243.0.0.8"
+                },
+                {
+                    "from_node": "243.0.0.8",
+                    "to_node": "127.0.0.30"
+                },
+                {
+                    "from_node": "127.0.0.30",
+                    "to_node": "243.0.0.9"
+                },
+                {
+                    "from_node": "243.0.0.9",
+                    "to_node": "127.0.0.20"
+                },
+                {
+                    "from_node": "127.0.0.10",
+                    "to_node": "127.0.0.11"
+                },
+                {
+                    "from_node": "127.0.0.10",
+                    "to_node": "243.0.0.10"
+                },
+                {
+                    "from_node": "243.0.0.10",
+                    "to_node": "127.0.0.20"
+                },
+                {
+                    "from_node": "127.0.0.51",
+                    "to_node": "127.0.0.50"
+                },
+                {
+                    "from_node": "127.0.0.20",
+                    "to_node": "243.0.0.11"
+                },
+                {
+                    "from_node": "243.0.0.11",
+                    "to_node": "127.0.0.10"
+                },
+                {
+                    "from_node": "127.0.0.20",
+                    "to_node": "127.0.0.21"
+                },
+                {
+                    "from_node": "127.0.0.30",
+                    "to_node": "127.0.0.31"
+                },
+                {
+                    "from_node": "127.0.0.20",
+                    "to_node": "243.0.0.12"
+                },
+                {
+                    "from_node": "243.0.0.12",
+                    "to_node": "127.0.0.50"
+                },
+                {
+                    "from_node": "127.0.0.30",
+                    "to_node": "243.0.0.13"
+                },
+                {
+                    "from_node": "243.0.0.13",
+                    "to_node": "127.0.0.10"
+                },
+                {
+                    "from_node": "127.0.0.30",
+                    "to_node": "243.0.0.14"
+                },
+                {
+                    "from_node": "243.0.0.14",
+                    "to_node": "127.0.0.50"
+                }
+            ]
+        }
+    }
+}
