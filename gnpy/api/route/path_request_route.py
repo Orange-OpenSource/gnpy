@@ -20,7 +20,7 @@ _examples_dir = Path(__file__).parent.parent.parent / 'example-data'
 @app.route(PATH_COMPUTATION_BASE_PATH, methods=['POST'])
 def compute_path(path_request_service: PathRequestService):
     data = request.json
-    request_data = data["request"]
+    request_data = data["gnpy-api:request"]
     service = request_data['service']
     if 'topology' in request_data:
         topology = request_data['topology']
