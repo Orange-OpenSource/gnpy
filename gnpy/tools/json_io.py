@@ -454,7 +454,7 @@ def requests_from_json(json_data, equipment):
     """Extract list of requests from data parsed from JSON"""
     requests_list = []
 
-    print(json_data['path-request'])
+    # print(json_data['path-request'])
     for req in json_data['path-request']:
         # init all params from request
         params = {}
