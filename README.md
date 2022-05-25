@@ -42,6 +42,6 @@ After typing the key, you can detach the container by typing ^P^Q.
 After starting the api server, you can launch a request
 
 ```
-    $ curl -v -X POST -H "Content-Type: application/json" -d @<PATH_TO_JSON_REQUEST_FILE> https://localhost:8080/api/v1/path-computation -k
+    $ curl -v -X POST -H "Content-Type: application/json" -d @<PATH_TO_JSON_REQUEST_FILE> http://localhost:8008/api/v1/path-computation -k
 
 ```
