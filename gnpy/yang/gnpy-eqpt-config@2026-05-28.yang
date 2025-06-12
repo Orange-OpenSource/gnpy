@@ -621,7 +621,7 @@ module gnpy-eqpt-config {
     leaf baud_rate {
       type decimal64 {
           fraction-digits 2;
-          range "100000000 .. 2000000000000";
+          range "10000000000 .. 1000000000000";
         }
       units "baud";
       description "Baud rate of this mode.";
@@ -629,7 +629,7 @@ module gnpy-eqpt-config {
     leaf tx_osnr {
       type decimal64 {
           fraction-digits 2;
-          range "0 .. max";
+          range "0 .. 1000";
         }
       units "dB";
       description "OSNR contribution of the TX for this mode.";
@@ -1016,6 +1016,13 @@ module gnpy-eqpt-config {
       }
       leaf-list other_name {
         type string;
+        must "not(/gnpyeqpt:equipment/gnpyeqpt:Transceiver/"
+            + "gnpyeqpt:type_variety = .) and "
+            + "count(/gnpyeqpt:equipment/gnpyeqpt:Transceiver/"
+            + "gnpyeqpt:other_name[. = current()]) = 1" {
+          error-message
+            "Each other_name must be unique and different of Transceivers'keys.";
+          }
         description "a list of alternative names for the equipment";
       }
       leaf comment {
@@ -1026,7 +1033,7 @@ module gnpy-eqpt-config {
         leaf min {
           type decimal64 {
               fraction-digits 2;
-              range "1000000000000 .. 1000000000000000";
+              range "180000000000000 .. 200000000000000";
             }
           units "Hz";
           description
@@ -1035,9 +1042,10 @@ module gnpy-eqpt-config {
         leaf max {
           type decimal64 {
               fraction-digits 2;
-              range "1000000000000 .. 1000000000000000";
+              range "180000000000000 .. 200000000000000";
             }
           units "Hz";
+          must ". >= ./../min";
           description
             "Upper central frequency for this transceiver.";
         }
@@ -1053,12 +1061,22 @@ module gnpy-eqpt-config {
         }
         leaf-list other_name {
           type string;
+          must "not(../../mode/format = current())" {
+            error-message
+              "mode/other_name must be different from all mode/format of this transceiver.";
+          }
+
+          must "count(../../mode/other_name[. = current()]) = 1" {
+            error-message
+              "mode/other_name must be unique amongst the other_names of this transceiver.";
+          }
+
           description "A list of alternative names for the mode.";
         }
         leaf OSNR {
           type decimal64 {
               fraction-digits 2;
-              range "0 .. 200";
+              range "0 .. 40";
             }
           units "dB";
           description "Min required OSNR in 0.1nm (dB).";
@@ -1066,7 +1084,7 @@ module gnpy-eqpt-config {
         leaf min_spacing {
           type decimal64 {
             fraction-digits 2;
-            range "100000000 .. 20000000000000";
+            range "10000000000 .. 2000000000000";
           }
           units "Hz";
           must ". >= ./../baud_rate";
@@ -1075,7 +1093,7 @@ module gnpy-eqpt-config {
         leaf bit_rate {
           type decimal64 {
               fraction-digits 2;
-              range "100000000 .. max";
+              range "1000000000 .. max";
             }
           units "bit/s" ;
           description "bit rate.";
