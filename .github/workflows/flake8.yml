@@ -1,0 +1,55 @@
+name: Flake8 Check
+
+on:
+  workflow_call:
+
+jobs:
+  flake8:
+    name: Flake8 on changed Python files
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8
+      
+      - name: Get changed Python files
+        id: changed-py-files
+        run: |
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            # for pull requests: compare with target branch
+            BASE_SHA=${{ github.event.pull_request.base.sha }}
+          else
+            # For push, compare with parent commit
+            BASE_SHA=${{ github.event.before }}
+          fi
+          
+          # Create a list of the changed python files
+          git diff --name-only --diff-filter=ACMRT $BASE_SHA ${{ github.sha }} | grep '\.py$' > changed_py_files.txt || echo "" > changed_py_files.txt
+          
+          if [ -s changed_py_files.txt ]; then
+            echo "files_exist=true" >> $GITHUB_OUTPUT
+            echo "Changes Python files:"
+            cat changed_py_files.txt
+          else
+            echo "files_exist=false" >> $GITHUB_OUTPUT
+            echo "No Python files changed"
+          fi
+      
+      - name: Run flake8 on changed files
+        if: steps.changed-py-files.outputs.files_exist == 'true'
+        run: |
+          # Execute flake8 on changed files
+          # Use flake8 config from the project (.flake8, tox.ini, etc.)
+          if [ -s changed_py_files.txt ]; then
+            xargs flake8 < changed_py_files.txt
+          fi
