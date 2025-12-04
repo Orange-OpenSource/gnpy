@@ -941,7 +941,8 @@ def preselect_multiband_amps(uid: str, _amplifiers: dict, prev_node: ELEMENT_TYP
         # get the target gain, power and tilt based on previous propagation
         gain_target, power_target, _tilt_target, _, _, _ = \
             compute_gain_power_and_tilt_target(amp, prev_node, next_node, power_mode, prev_voa[band], prev_dp[band],
-                                               pref_total_db[band], network, equipment, deviation_db[band], tilt_target[band])
+                                               pref_total_db[band], network, equipment, deviation_db[band],
+                                               tilt_target[band])
         _selection = [a.variety
                       for a in filter_edfa_list_based_on_targets(uid, edfa_eqpt, power_target, gain_target,
                                                                  _tilt_target, target_extended_gain)]
@@ -1160,10 +1161,10 @@ def set_egress_amplifier(network: DiGraph, this_node: Union[elements.Roadm, elem
     Go through each link starting from this_node until next Roadm or Transceiver and
     set the amplifiers (Edfa and multiband) according to configurations set by user.
     Computes the gain for Raman finers and records it as the gain for reference design.
-    
+
     - power_mode = True, set amplifiers delta_p and effective_gain
     - power_mode = False, set amplifiers effective_gain and ignore delta_p config: set it to None.
-    
+
     Records the computed dp in an internal variable for autodesign purpose.
 
     :param network: The network graph containing nodes and links.
@@ -1921,7 +1922,7 @@ def split_fiber(network, fiber, bounds, target_length):
     ypos = [prev_node.lat + (next_node.lat - prev_node.lat) * (n + 0.5) / n_spans for n in range(n_spans)]
     for span, lng, lat in zip(range(n_spans), xpos, ypos):
         new_span = elements.Fiber(
-            uid=f'{fiber.uid}_({span+1}/{n_spans})',
+            uid=f'{fiber.uid}_({span + 1}/{n_spans})',
             type_variety=fiber.type_variety,
             metadata={
                 'location': {
@@ -1945,7 +1946,7 @@ def split_fiber(network, fiber, bounds, target_length):
     network.add_edge(prev_node, next_node, weight=edgeweight)
 
 
-def add_connector_loss(network: DiGraph, fibers: List[elements.Fiber], default_con_in: float, 
+def add_connector_loss(network: DiGraph, fibers: List[elements.Fiber], default_con_in: float,
                        default_con_out: float, EOL: float):
     """Adds default connector loss to fibers in the network if not already defined.
 
@@ -1984,7 +1985,7 @@ def add_connector_loss(network: DiGraph, fibers: List[elements.Fiber], default_c
 def add_fiber_padding(network: DiGraph, fibers: List[elements.Fiber], padding: float, equipment: dict):
     """Adds padding attenuation at the input of the first fiber in a succession of fibers.
 
-    This function checks each fiber in the network and adds a specified padding loss at the input of the 
+    This function checks each fiber in the network and adds a specified padding loss at the input of the
     first fiber in a series of connected fibers if the calculated span loss is less than the specified padding.
 
     :param network: The network graph containing nodes and links.

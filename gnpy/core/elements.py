@@ -1396,7 +1396,7 @@ class Edfa(_Node):
                           f'  effective gain(dB):     {self.effective_gain:.2f}',
                           '  (before att_in and before output VOA)',
                           # tilt_target is per lambda on the amp band
-                          f'  tilt-target(dB)         {self.tilt_target if self.tilt_target not in [None, -0.0] else 0:.2f}',
+                          f'  tilt-target(dB)         {self.tilt_target if self.tilt_target not in [None, -0.0] else 0:.2f}',    # noqa E501
                           # avoids -0.00 value for tilt_target
                           f'  noise figure (dB):      {nf:.2f}',
                           '  (including att_in)',

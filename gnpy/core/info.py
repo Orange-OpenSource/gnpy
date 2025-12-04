@@ -316,7 +316,7 @@ def create_input_spectral_information(f_min, f_max, roll_off, baud_rate, spacing
     number_of_channels = automatic_nch(f_min, f_max, spacing)
     frequency = [(f_min + spacing * i) for i in range(1, number_of_channels + 1)]
     delta_pdb_per_channel = delta_pdb * ones(number_of_channels)
-    label = [f'{baud_rate * 1e-9 :.2f}G' for i in range(number_of_channels)]
+    label = [f'{baud_rate * 1e-9:.2f}G' for i in range(number_of_channels)]
     return create_arbitrary_spectral_information(frequency, slot_width=spacing, signal=tx_power, baud_rate=baud_rate,
                                                  roll_off=roll_off, delta_pdb_per_channel=delta_pdb_per_channel,
                                                  tx_osnr=tx_osnr, tx_power=tx_power, label=label)

@@ -250,13 +250,13 @@ class RamanSolver:
                         gamma2[:, 1:] = sum(crpz[:, :, 1:] * z_integral, 1)
                         exponent += gamma2
                     if sim_params.raman_params.order >= 3:
-                        z_integrand = expz * (gamma2 + 1/2 * gamma1**2)
+                        z_integrand = expz * (gamma2 + 1 / 2 * gamma1**2)
                         z_integral = cumsum((z_integrand[:, :-1] + z_integrand[:, 1:]) / 2 * dz, 1)
                         gamma3 = zeros(gamma1.shape)
                         gamma3[:, 1:] = sum(crpz[:, :, 1:] * z_integral, 1)
                         exponent += gamma3
                     if sim_params.raman_params.order >= 4:
-                        z_integrand = expz * (gamma3 + gamma1 * gamma2 + 1/factorial(3) * gamma1**3)
+                        z_integrand = expz * (gamma3 + gamma1 * gamma2 + 1 / factorial(3) * gamma1**3)
                         z_integral = cumsum((z_integrand[:, :-1] + z_integrand[:, 1:]) / 2 * dz, 1)
                         gamma4 = zeros(gamma1.shape)
                         gamma4[:, 1:] = sum(crpz[:, :, 1:] * z_integral, 1)
@@ -268,7 +268,7 @@ class RamanSolver:
             dz = z[1:] - z[:-1]
             power = outer(power_in, ones(z.size))
             for i in range(1, z.size):
-                power[:, i] = (power[:, i - 1] * (1 + (- alpha + sum(cr * power[:, i - 1], 1)) * dz[i - 1]) *
+                power[:, i] = (power[:, i - 1] * (1 + (- alpha + sum(cr * power[:, i - 1], 1)) * dz[i - 1]) *   # noqa W504
                                lumped_losses[i - 1])
         else:
             raise ValueError(f'Method {sim_params.raman_params.method} not implemented in Raman Solver.')
@@ -450,7 +450,7 @@ class NliSolver:
         beta2 = (cut_beta + pump_beta) / 2
         right_extreme = df + pump_baud_rate / 2
         left_extreme = df - pump_baud_rate / 2
-        psi = (arcsinh(pi ** 2 * asymptotic_length * abs(beta2) * cut_baud_rate * right_extreme) -
+        psi = (arcsinh(pi ** 2 * asymptotic_length * abs(beta2) * cut_baud_rate * right_extreme) -    # noqa W504
                arcsinh(pi ** 2 * asymptotic_length * abs(beta2) * cut_baud_rate * left_extreme)) / 2
         psi *= effective_length ** 2 / (2 * pi * abs(beta2) * asymptotic_length)
         return psi
@@ -551,7 +551,7 @@ class NliSolver:
         integrand_f1 = zeros(f1_array.size)
         for f1_index, f1 in enumerate(f1_array):
             delta_beta = 4 * pi ** 2 * (f1 - f_eval) * (f2_array - f_eval) * (
-                        beta2 + pi * beta3 * (f1 + f2_array - 2 * f_ref_beta))
+                        beta2 + pi * beta3 * (f1 + f2_array - 2 * f_ref_beta))     # noqa E126
             integrand_f2 = NliSolver._generalized_rho_nli(delta_beta, rho_pump, z, alpha)
             integrand_f1[f1_index] = 2 * trapz(integrand_f2, f2_array)  # 2x since integrand_f2 is symmetric in f2
         generalized_psi = 0.5 * sum(integrand_f1) * pump_baud_rate
@@ -579,7 +579,7 @@ class NliSolver:
             rc2 = raised_cosine(f2_array, cut_frequency, cut_baud_rate, cut_roll_off)
             rc3 = raised_cosine(f3_array, pump_frequency, pump_baud_rate, pump_roll_off)
             delta_beta = 4 * pi ** 2 * (f1_array[i] - f_eval) * (f2_array - f_eval) * (
-                        beta2 + pi * beta3 * (f1_array[i] + f2_array - 2 * f_ref_beta))
+                        beta2 + pi * beta3 * (f1_array[i] + f2_array - 2 * f_ref_beta))     # noqa E126
             integrand_f2 = rc1[i] * rc2 * rc3 * NliSolver._generalized_rho_nli(delta_beta, rho_pump, z, alpha)
             integrand_f1[i] = trapz(integrand_f2, f2_array)
         generalized_psi = trapz(integrand_f1, f1_array)
@@ -688,7 +688,6 @@ class NliSolver:
         return psi
 
 
-
 def estimate_nf_model(type_variety, gain_min, gain_max, nf_min, nf_max):
     if nf_min < -10:
         raise EquipmentConfigError(f'Invalid nf_min value {nf_min!r} for amplifier {type_variety}')
@@ -703,7 +702,7 @@ def estimate_nf_model(type_variety, gain_min, gain_max, nf_min, nf_max):
     delta_p = 5
     g1a_min = gain_min - (gain_max - gain_min) - delta_p
     g1a_max = gain_max - delta_p
-    nf2 = lin2db((db2lin(nf_min) - db2lin(nf_max)) /
+    nf2 = lin2db((db2lin(nf_min) - db2lin(nf_max)) /     # noqa W504
                  (1 / db2lin(g1a_max) - 1 / db2lin(g1a_min)))
     nf1 = lin2db(db2lin(nf_min) - db2lin(nf2) / db2lin(g1a_max))
 
@@ -727,9 +726,9 @@ def estimate_nf_model(type_variety, gain_min, gain_max, nf_min, nf_max):
     # Check calculated values for nf1 and nf2
     calc_nf_min = lin2db(db2lin(nf1) + db2lin(nf2) / db2lin(g1a_max))
     if not isclose(nf_min, calc_nf_min, abs_tol=0.01):
-        raise EquipmentConfigError(f'nf_min does not match calc_nf_min, {nf_min} vs {calc_nf_min} for amp {type_variety}')
+        raise EquipmentConfigError(f'nf_min does not match calc_nf_min, {nf_min} vs {calc_nf_min} for amp {type_variety}')  # noqa E501
     calc_nf_max = lin2db(db2lin(nf1) + db2lin(nf2) / db2lin(g1a_min))
     if not isclose(nf_max, calc_nf_max, abs_tol=0.01):
-        raise EquipmentConfigError(f'nf_max does not match calc_nf_max, {nf_max} vs {calc_nf_max} for amp {type_variety}')
+        raise EquipmentConfigError(f'nf_max does not match calc_nf_max, {nf_max} vs {calc_nf_max} for amp {type_variety}')  # noqa E501
 
     return nf1, nf2, delta_p
