@@ -39,3 +39,4 @@ WARNING  gnpy.topology.request:request.py 	Warning! Request 0 computed path from
 	PDL_penalty = None
 	CD_penalty = None
 	PMD_penalty = None
+	rx_power_penalty = None
