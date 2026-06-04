@@ -162,36 +162,6 @@
                         "label": "mode_2",
                         "average": "0.0"
                       }
-                    ],
-                    "cd-penalty-db": [
-                      {
-                        "label": "mode_1",
-                        "average": "0.0"
-                      },
-                      {
-                        "label": "mode_2",
-                        "average": "0.0"
-                      }
-                    ],
-                    "pmd-penalty-db": [
-                      {
-                        "label": "mode_1",
-                        "average": "0.0"
-                      },
-                      {
-                        "label": "mode_2",
-                        "average": "0.0"
-                      }
-                    ],
-                    "pdl-penalty-db": [
-                      {
-                        "label": "mode_1",
-                        "average": "0.0"
-                      },
-                      {
-                        "label": "mode_2",
-                        "average": "0.0"
-                      }
                     ]
                   }
                 }
@@ -455,36 +425,6 @@
                     ],
                     "latency-ms": "0.61",
                     "actual-pch-out-dbm": [
-                      {
-                        "label": "mode_1",
-                        "average": "0.0"
-                      },
-                      {
-                        "label": "mode_2",
-                        "average": "0.0"
-                      }
-                    ],
-                    "cd-penalty-db": [
-                      {
-                        "label": "mode_1",
-                        "average": "0.05"
-                      },
-                      {
-                        "label": "mode_2",
-                        "average": "0.05"
-                      }
-                    ],
-                    "pmd-penalty-db": [
-                      {
-                        "label": "mode_1",
-                        "average": "0.01"
-                      },
-                      {
-                        "label": "mode_2",
-                        "average": "0.01"
-                      }
-                    ],
-                    "pdl-penalty-db": [
                       {
                         "label": "mode_1",
                         "average": "0.0"

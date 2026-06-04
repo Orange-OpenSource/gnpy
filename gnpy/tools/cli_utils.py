@@ -393,7 +393,7 @@ def prepare_detailed_path(propagatedpths: List[List[Union[elements.Transceiver, 
             path_array.append([f'request {rqs[i].request_id}'])
             path_array.append([f'{rqs[i].source} to {rqs[i].destination}'])
             path_array.append([f'snr@0.1nm : {round(mean(p[-1].snr_01nm), 2)} dB',   # noqa E203
-                               f'Receiver minOSNR : {rqs[i].OSNR} dB'])   # noqa E203
+                               f'Receiver minOSNR : {rqs[i].required_osnr_db_01nm} dB'])   # noqa E203
             chemin = []
             for var_element in p:
                 class_name = type(var_element).__name__
