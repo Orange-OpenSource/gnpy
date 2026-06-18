@@ -88,7 +88,8 @@ def load_common_data(equipment_filename: Path,
         network = load_network(topology_filename, equipment)
         if save_raw_network_filename is not None:
             save_network(network, save_raw_network_filename)
-            print(f'{ansi_escapes.blue}Raw network (no optimizations) saved to {save_raw_network_filename}{ansi_escapes.reset}')  # noqa E501
+            print(f'{ansi_escapes.blue}Raw network (no optimizations)'
+                  + f' saved to {save_raw_network_filename}{ansi_escapes.reset}')
         if not simulation_filename:
             sim_params = {}
             if next((node for node in network if isinstance(node, elements.RamanFiber)), None) is not None:
