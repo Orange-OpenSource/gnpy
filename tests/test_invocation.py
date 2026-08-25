@@ -14,7 +14,10 @@ import os
 from logging import INFO, Formatter
 import pytest
 import subprocess
+import re
+
 from gnpy.tools.cli_examples import transmission_main_example, path_requests_run
+from gnpy.core import exceptions
 
 SRC_ROOT = Path(__file__).parent.parent
 
@@ -79,6 +82,21 @@ def test_example_invocation(capfd, caplog, output, log, handler, args):
     if log:
         expected_log = open(SRC_ROOT / 'tests' / 'invocation' / log, mode='r', encoding='utf-8').read()
         assert expected_log == caplog.text
+
+
+@pytest.mark.parametrize("handler, error_type, expected_error_msg, captured_err, args", [
+(transmission_main_example, exceptions.SpectrumError,
+ "OpenRoadm amplifier model is not compatible with heterogeneous spectrum (different slot widths). Please correct spectrum.",
+ '',
+ ['gnpy/example-data/Sweden_OpenROADMv5_example_network.json', '-e', 'gnpy/example-data/eqpt_config_openroadm_ver5.json',
+  '--spectrum', 'gnpy/example-data/initial_spectrum2.json', ]),
+])
+def test_example_invocation_with_error(capfd, handler, error_type, expected_error_msg, captured_err, args):
+    '''Make sure that our examples produce useful output'''
+    with pytest.raises(error_type, match=re.escape(expected_error_msg)):
+        handler(args)
+    captured = capfd.readouterr()
+    assert captured.err == captured_err
 
 
 @pytest.mark.parametrize('program', ('gnpy-transmission-example', 'gnpy-path-request'))
