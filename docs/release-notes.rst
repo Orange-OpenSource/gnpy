@@ -8,30 +8,166 @@ Each release introduces some changes and new features.
 
 (prepare text for next release)
 
-MAJOR Change end of support for python < 3.11
+v3.0
+====
 
-GNPy is moving to most recent releases for the following packages.
-Execution of the scripts requires in particular updates for numpy:
-    
+This release introduces several breaking changes, new fiber-modeling capabilities,
+accuracy improvements, and more consistent YANG-compatible output formats.
+
+**Breaking changes**
+
+**Python and dependency requirements**
+
+Support for Python versions older than 3.11 has been dropped.
+
+GNPy has been updated to use more recent versions of its main dependencies.
+In particular, execution of the scripts now requires NumPy 2.x.
+
+The main dependency updates are:
+
     | package              | from   | to     |
     | -------------------- | ------ | ------ |
     | alabaster            | 0.7.21 | 1.0.0  |
-    | docutils             | 0.21.2 | 0.22.4 |
-    | matplotlib           | 3.10.3 | 3.10.8 |
-    | networkx             | 3.4.2  | 3.6.1  |
-    | numpy                | 1.26.4 | 2.4.0  |
-    | pandas               | 2.3.0  | 2.3.3  |
-    | pbr                  | 6.1.1  | 7.0.3  |
+    | docutils             | 0.17.1 | 0.22.4 |
+    | matplotlib           | 3.7.3  | 3.10.8 |
+    | networkx             | 3.1    | 3.6.1  |
+    | numpy                | 1.24.4 | 2.4.0  |
+    | pandas               | 2.1    | 2.3.3  |
+    | pbr                  | 6.0.0  | 7.0.3  |
     | psutil               | 7.0.0  | 7.2.1  |
     | pygments             | 2.11.2 | 2.19.2 |
-    | scipy                | 1.15.3 | 1.16.3 |
+    | pytest               | 7.4.3  | > 8    |
+    | scipy                | 1.10.1 | 1.16.3 |
     | sphinx               | 8.1.3  | 9.1.0  |
     | sphinxcontrib-bibtex | 2.6.4  | 2.6.5  |
     | sphinx_rtd_theme     | 3.0.2  | 3.10.8 |
     | xlrd                 | 2.0.1  | 2.0.2  |
 
-- numpy.trapz function has been deprecated and replaced by numpy.trapezoid.
-- numpy.reshape newshape option has been deprecated and replaced by shape.
+The following deprecated NumPy APIs have also been replaced:
+
+- ``numpy.trapz`` has been replaced with ``numpy.trapezoid``.
+- The deprecated ``newshape`` argument of ``numpy.reshape`` has been replaced
+  with the ``shape`` argument.
+
+**Channel numbering and spectrum propagation**
+
+Channel numbering now starts at channel 0.
+
+Previously, the number of channels used during design was computed as:
+
+``(f_max - f_min) / spacing``
+
+whereas propagation used one fewer channel and started at
+``f_min + spacing``. This behavior has been aligned.
+
+For a given Spectrum Information (SI):
+
+- the number of channels is now identical during design and propagation;
+- the first channel is located at ``f_min``;
+- the last channel is located at ``f_max``;
+- both boundary frequencies are included.
+
+This is a breaking change and may modify channel assignments, propagation
+results, and spectrum-related outputs.
+
+**Spectrum assignment boundaries**
+
+Spectrum bitmap boundaries are now handled consistently with the configured
+frequency range.
+
+The upper bitmap bound includes the slot corresponding to ``f_max``. Allocations
+starting exactly at ``n_min`` are also accepted; only allocations starting below
+``n_min`` are rejected.
+
+This change ensures that the first and last available frequency slots are
+included in the spectrum bitmap and prevents valid allocations at the lower
+boundary from being rejected.
+
+**Fiber modeling**
+
+A frequency-dependent fiber loss model can now be declared as a list in the
+equipment file and referenced from the topology file through ``type_variety``.
+
+This avoids duplicating the complete model definition for every fiber instance
+in the topology file.
+
+Once a model has been instantiated in the topology, its loss can be customized
+using the legacy ``loss_coef`` scalar. The model is scaled so that, at
+``ref_frequency``, its value matches the specified ``loss_coef``.
+
+This preserves the legacy topology-level configuration while allowing reusable
+frequency-dependent loss models to be defined in the equipment library and
+selected through ``type_variety``.
+
+When both a legacy dictionary-based model and a list-based model are provided,
+the legacy dictionary-based model takes precedence.
+
+**Accuracy improvements**
+
+**Cumulative chromatic dispersion**
+
+Cumulative chromatic dispersion is now computed directly from the fiber
+``dispersion`` parameter.
+
+Previously, chromatic dispersion was evaluated from the ``beta2`` and ``beta3``
+parameters used internally by the simulation. This could lead to incorrect
+results when a dispersion slope was provided.
+
+The new behavior ensures that cumulative chromatic dispersion follows the
+dispersion model defined in the fiber parameters.
+
+The existing behavior of using a constant ``beta2`` when no dispersion slope is
+specified is preserved for nonlinear interference evaluation. As ``beta2`` and
+chromatic dispersion cannot both remain constant over frequency, their values
+may differ when a constant ``beta2`` is used.
+
+**Spectrum slot width**
+
+The slot width is now taken directly from the ``spectral_info`` data instead of
+being recomputed.
+
+This avoids inconsistencies between the configured Spectrum Information and the
+slot width used internally by the simulation.
+
+**YANG-compatible output**
+
+JSON exports have been updated to conform to the YANG model.
+
+The corresponding corrections also apply to CSV exports and command-line output.
+In particular:
+
+- YANG validation is now enforced for all JSON exports;
+- per-label averages with a value of ``None`` are no longer exported;
+- cumulative results are exported per label;
+- transmission results containing mixed rates are averaged per label instead of
+  being averaged over the entire spectrum;
+- per-label results are now displayed consistently in command-line output.
+
+These changes may modify the structure or content of generated JSON and CSV
+results, as well as command-line output.
+
+**Bug fixes**
+
+- Fixed the computation of cumulative chromatic dispersion when a dispersion
+  slope is defined.
+- Fixed channel propagation so that it starts with channel 0.
+- Fixed spectrum bitmap boundary handling.
+- Fixed the inclusion of the maximum frequency slot in the OMS spectrum bitmap.
+- Fixed the acceptance of allocations starting at the minimum spectrum index.
+- Fixed the conversion of ``nmax`` values used for spectrum assignment.
+- Fixed the display of per-label results.
+- Fixed JSON export validation and YANG conformance issues.
+- Replaced a non-ASCII arrow character with ``->`` to improve compatibility with
+  macOS environments.
+
+**Documentation and maintenance**
+
+- Updated the linter configuration.
+- Updated imports used by the documentation generation process to avoid
+  conflicts between the ``json_io`` and ``elements`` modules in Sphinx autodoc.
+- Prepared the project for the next release of ``oopt-gnpy-libyang`` by limiting
+  the release number until cross-platform compatibility is confirmed.
+
 
 
 v2.14
