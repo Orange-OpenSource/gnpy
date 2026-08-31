@@ -13,6 +13,8 @@ v3.0
 
 This release introduces several breaking changes, new fiber-modeling capabilities,
 accuracy improvements, and more consistent YANG-compatible output formats.
+It also improves transceiver feasibility evaluation by adding receiver
+power constraints, detailed receiver modeling, and Q-margin calculation.
 
 **Breaking changes**
 
@@ -146,6 +148,72 @@ In particular:
 These changes may modify the structure or content of generated JSON and CSV
 results, as well as command-line output.
 
+**Receiver-aware feasibility evaluation**
+
+Transceiver modes can now define minimum and maximum received channel-power
+limits. A mode is considered infeasible when the received power falls outside
+these limits.
+
+The following parameters are supported:
+
+- ``rx-channel-power-min-dbm``;
+- ``rx-channel-power-max-dbm``.
+
+These constraints are evaluated per carrier, allowing different requirements
+for channels using different transceiver modes.
+
+**Q-margin calculation**
+
+Detailed receiver parameters can now be provided for a transceiver mode through
+the ``detailed_rx`` configuration.
+
+When detailed receiver parameters are available, GNPy calculates the receiver
+BER and derives a Q-margin from the configured BER threshold. The Q-margin is
+then used for path feasibility evaluation and automatic mode selection.
+
+When no detailed receiver information is provided, GNPy continues to use the
+standard OSNR-based feasibility calculation.
+
+**Per-carrier transceiver parameters**
+
+Transceiver mode information is now propagated through the spectral information
+on a per-carrier basis.
+
+The following parameters can therefore be associated with individual carriers:
+
+- required OSNR;
+- impairment penalties;
+- minimum and maximum received channel power;
+- detailed receiver parameters.
+
+This enables mixed-rate and mixed-mode spectra to be evaluated using
+carrier-specific performance requirements.
+
+**Transceiver roles**
+
+Transceivers are now explicitly identified as emitters or receivers during
+propagation.
+
+Receiver-specific calculations, including received power, receiver penalties,
+receiver noise contribution, and feasibility evaluation, are performed only
+by the receiving transceiver.
+
+**YANG model updates**
+
+The YANG models have been updated to support detailed receiver parameters and
+the corrected transmitted and received power-range field names.
+
+The updated YANG model revision is ``2026-05-28``. The following fields are
+now used:
+
+- ``tx-channel-power-min-dbm``;
+- ``tx-channel-power-max-dbm``;
+- ``rx-channel-power-min-dbm``;
+- ``rx-channel-power-max-dbm``.
+
+Users relying on previous YANG revisions or previous power-range field names
+should update their equipment and service configurations.
+
 **Bug fixes**
 
 - Fixed the computation of cumulative chromatic dispersion when a dispersion
@@ -167,7 +235,6 @@ results, as well as command-line output.
   conflicts between the ``json_io`` and ``elements`` modules in Sphinx autodoc.
 - Prepared the project for the next release of ``oopt-gnpy-libyang`` by limiting
   the release number until cross-platform compatibility is confirmed.
-
 
 
 v2.14
