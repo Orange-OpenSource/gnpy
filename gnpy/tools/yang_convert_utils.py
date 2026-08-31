@@ -609,6 +609,7 @@ def convert_none_to_empty(json_data: Any):
     :rtype: Any
 
     :example:
+
     >>> a = {'uid': '[930/WRT-2-2-SIG=>923/WRT-1-9-SIG]-923/AMP-1-13', 'type_variety': 'AMP',
     ... 'metadata': {'location': {'latitude': 0.0, 'longitude': 0.0, 'city': 'Zion', 'region': ''}},
     ... 'type': 'Multiband_amplifier', 'amplifiers': [{'type_variety': 'AMP_LOW_C',

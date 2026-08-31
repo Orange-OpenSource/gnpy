@@ -8,7 +8,7 @@
 
 """
 gnpy.topology.topology_parameters
-========================
+=================================
 
 This module contains all parameters for topology modules
 """

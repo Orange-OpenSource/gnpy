@@ -573,7 +573,7 @@ def save_path_array_to_xlsx(output_path: Path,
     :type propagations_for_path: List[List[Union[elements.Transceiver, elements.Fiber, elements.RamanFiber,
                                  elements.Edfa, elements.Multiband_amplifier, elements.Fused]]]
     :param req: Object containing request information
-    :type req:PathRequest
+    :type req: PathRequest
     :return: Path of the created xlsx file.
     :rtype: Path
     """
