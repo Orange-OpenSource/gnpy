@@ -214,6 +214,14 @@ now used:
 Users relying on previous YANG revisions or previous power-range field names
 should update their equipment and service configurations.
 
+**Transceiver output power**
+
+When ``tx_power`` is not explicitly provided in a service request, GNPy now
+uses the ``tx-channel-power-max-dbm`` value defined by the selected
+transceiver mode, when available. This value takes precedence over the default
+SI ``tx_power_dbm`` setting and is used for mode feasibility evaluation and
+subsequent propagation.
+
 **Bug fixes**
 
 - Fixed the computation of cumulative chromatic dispersion when a dispersion
