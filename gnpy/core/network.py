@@ -1756,14 +1756,7 @@ def add_roadm_booster(network: DiGraph, roadm: elements.Roadm):
         network.add_edge(roadm, amp, weight=0.01)
         network.add_edge(amp, next_node, weight=0.01)
         # update degree_association and per degree pch definitions:
-        if next_node.uid in roadm.degree_association:
-            roadm.degree_association[amp.uid] = roadm.degree_association.pop(next_node.uid)
-            if next_node.uid in roadm.per_degree_pch_out_dbm:
-                roadm.per_degree_pch_out_dbm[amp.uid] = roadm.per_degree_pch_out_dbm.pop(next_node.uid)
-            elif next_node.uid in roadm.per_degree_pch_psw:
-                roadm.per_degree_pch_psw_dbm[amp.uid] = roadm.per_degree_pch_psw.pop(next_node.uid)
-            elif next_node.uid in roadm.per_degree_pch_psd:
-                roadm.per_degree_pch_psd_dbm[amp.uid] = roadm.per_degree_pch_psd.pop(next_node.uid)
+        update_degree_parameters(roadm, next_node.uid, amp.uid)
 
 
 def add_roadm_preamp(network: DiGraph, roadm: elements.Roadm):
@@ -1834,11 +1827,7 @@ def add_roadm_preamp(network: DiGraph, roadm: elements.Roadm):
         network.add_edge(prev_node, amp, weight=edgeweight)
         network.add_edge(amp, roadm, weight=0.01)
         # update degree_association in ROADM
-        try:
-            degree = next(k for k, v in roadm.degree_association.items() if v == prev_node.uid)
-            roadm.degree_association[degree] = amp.uid
-        except StopIteration:
-            pass
+        update_paired_degree_parameters(roadm, prev_node.uid, amp.uid)
 
 
 def add_inline_amplifier(network: DiGraph, fiber: elements.Fiber):
@@ -1947,6 +1936,43 @@ def get_previous_node(node, network):
             f'{type(node).__name__} {node.uid} is not properly connected, please check network topology')
 
 
+def update_degree_parameters(node: elements.Roadm, old_uid: str, new_uid: str):
+    """update per degree information when the degree name is changed because of fiber splitting or booster insertion
+
+    :param node: Roadm Node
+    :type node: elements.Roadm
+    :param old_uid: old degree
+    :type old_uid: str
+    :param new_uid: new degree
+    :type new_uid: str
+    """
+    if old_uid in node.degree_association:
+        node.degree_association[new_uid] = node.degree_association.pop(old_uid)
+        if old_uid in node.per_degree_pch_out_dbm:
+            node.per_degree_pch_out_dbm[new_uid] = node.per_degree_pch_out_dbm.pop(old_uid)
+        elif old_uid in node.per_degree_pch_psw:
+            node.per_degree_pch_psw_dbm[new_uid] = node.per_degree_pch_psw.pop(old_uid)
+        elif old_uid in node.per_degree_pch_psd:
+            node.per_degree_pch_psd_dbm[new_uid] = node.per_degree_pch_psd.pop(old_uid)
+
+
+def update_paired_degree_parameters(node: elements.Roadm, old_uid: str, new_uid: str):
+    """Update paired degree in associations with the new name when fiber is split or when a preamp is inserted
+
+    :param node: Roadm node
+    :type node: elements.Roadm
+    :param old_uid: old degree
+    :type old_uid: str
+    :param new_uid: new degree
+    :type new_uid: str
+    """
+    try:
+        degree = next(k for k, v in node.degree_association.items() if v == old_uid)
+        node.degree_association[degree] = new_uid
+    except StopIteration:
+        pass
+
+
 def split_fiber(network, fiber, bounds, target_length):
     """Splits a fiber into multiple spans if its length exceeds specified boundaries.
 
@@ -2005,12 +2031,18 @@ def split_fiber(network, fiber, bounds, target_length):
         else:
             edgeweight = 0.01
         network.add_edge(prev_node, new_span, weight=edgeweight)
+        # update degree_association with the new first span:
+        if isinstance(prev_node, elements.Roadm):
+            update_degree_parameters(prev_node, fiber.uid, new_span.uid)
         prev_node = new_span
     if isinstance(prev_node, elements.Fiber):
         edgeweight = prev_node.params.length
     else:
         edgeweight = 0.01
     network.add_edge(prev_node, next_node, weight=edgeweight)
+    # update degree_association with the new last span:
+    if isinstance(next_node, elements.Roadm):
+        update_paired_degree_parameters(next_node, fiber.uid, prev_node.uid)
 
 
 def add_connector_loss(network: DiGraph, fibers: List[elements.Fiber], default_con_in: float,
