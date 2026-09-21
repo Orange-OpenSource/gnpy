@@ -1,0 +1,86 @@
+[1;34;40mList of disjunctions[0m
+[]
+[1;34;40mThe following services have been requested:[0m
+[PathRequest main
+	source: 	trx node1
+	destination:	trx node2
+	trx type:	Voyager
+	trx mode:	None
+	baud_rate:	None Gbaud
+	bit_rate:	None Gb/s
+	spacing:	100.0 GHz
+	power:  	0.0 dBm
+	tx_power_dbm:  	0.0 dBm
+	nb channels: 	48
+	path_bandwidth: 	100.0 Gbit/s
+	nodes-list:	['roadm node1', 'west edfa in siteE', 'roadm node2']
+	loose-list:	['STRICT', 'STRICT', 'STRICT']
+, PathRequest prot
+	source: 	trx node1
+	destination:	trx node2
+	trx type:	Voyager
+	trx mode:	None
+	baud_rate:	None Gbaud
+	bit_rate:	None Gb/s
+	spacing:	100.0 GHz
+	power:  	0.0 dBm
+	tx_power_dbm:  	0.0 dBm
+	nb channels: 	48
+	path_bandwidth: 	100.0 Gbit/s
+	nodes-list:	['roadm node1', 'west edfa in siteF', 'roadm node2']
+	loose-list:	['STRICT', 'STRICT', 'STRICT']
+, PathRequest 3
+	source: 	trx node1
+	destination:	trx node2
+	trx type:	Voyager
+	trx mode:	None
+	baud_rate:	None Gbaud
+	bit_rate:	None Gb/s
+	spacing:	100.0 GHz
+	power:  	0.0 dBm
+	tx_power_dbm:  	0.0 dBm
+	nb channels: 	48
+	path_bandwidth: 	100.0 Gbit/s
+	nodes-list:	['roadm node1', 'west edfa in siteA']
+	loose-list:	['LOOSE', 'LOOSE']
+, PathRequest 4
+	source: 	trx node1
+	destination:	trx node2
+	trx type:	Voyager
+	trx mode:	None
+	baud_rate:	None Gbaud
+	bit_rate:	None Gb/s
+	spacing:	100.0 GHz
+	power:  	0.0 dBm
+	tx_power_dbm:  	0.0 dBm
+	nb channels: 	48
+	path_bandwidth: 	100.0 Gbit/s
+	nodes-list:	['roadm node1', 'east edfa in siteC', 'roadm node2']
+	loose-list:	['LOOSE', 'LOOSE', 'LOOSE']
+, PathRequest 5
+	source: 	trx node1
+	destination:	trx node2
+	trx type:	Voyager
+	trx mode:	None
+	baud_rate:	None Gbaud
+	bit_rate:	None Gb/s
+	spacing:	100.0 GHz
+	power:  	0.0 dBm
+	tx_power_dbm:  	0.0 dBm
+	nb channels: 	48
+	path_bandwidth: 	100.0 Gbit/s
+	nodes-list:	['roadm node1', 'west edfa in siteD to node1', 'roadm node2']
+	loose-list:	['LOOSE', 'LOOSE', 'LOOSE']
+]
+[1;34;40mResult summary[0m
++----------+-------------------------+------------------+--------------+------------------+--------------+------------+--------+----------+-------------+-------------------+
+|  req id  |         demand          |  GSNR@bandwidth  |  GSNR@0.1nm  |  OSNR@bandwidth  |  OSNR@0.1nm  |  Receiver  |  mode  |  Gbit/s  |   nb of     |      N,M or       |
+|          |                         |    A-Z (Z-A)     |  A-Z (Z-A)   |    A-Z (Z-A)     |  A-Z (Z-A)   |  minOSNR   |        |          |  tsp pairs  |  blocking reason  |
+|----------+-------------------------+------------------+--------------+------------------+--------------+------------+--------+----------+-------------+-------------------|
+|   main   | trx node1 to trx node2: |       20.9       |    28.12     |      20.98       |    28.21     |     23     | mode 2 |   100    |      1      |   ([-280],[8])    |
+|   prot   | trx node1 to trx node2: |      18.13       |    25.36     |      18.46       |    25.69     |     23     | mode 2 |   100    |      1      |   ([-280],[8])    |
+|    3     | trx node1 to trx node2: |       14.2       |    21.42     |      14.48       |    21.71     |     18     | mode 4 |   100    |      1      |   ([-280],[8])    |
+|    4     | trx node1 to trx node2: |      20.17       |    27.39     |      20.32       |    27.54     |     23     | mode 2 |   100    |      1      |   ([-280],[8])    |
+|    5     | trx node1 to trx node2: |      20.17       |    27.39     |      20.32       |    27.54     |     23     | mode 2 |   100    |      1      |   ([-280],[8])    |
++----------+-------------------------+------------------+--------------+------------------+--------------+------------+--------+----------+-------------+-------------------+
+Result summary shows mean GSNR and OSNR (average over all channels)

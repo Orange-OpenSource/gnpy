@@ -977,61 +977,70 @@ def corresp_names(input_filename: Path, network: DiGraph) -> Tuple[dict, dict, d
     :return: A tuple containing dictionaries for ROADMs, fused nodes, and ILAs.
     :rtype: Tuple[dict, dict, dict]
     """
-    nodes, links, eqpts, _ = parse_excel(input_filename)
+    nodes, links, eqpts, roadms = parse_excel(input_filename)
+    assign_implicit_pair_ids(nodes, links, eqpts, roadms)
     fused = [n.uid for n in network.nodes() if isinstance(n, Fused)]
     ila = [n.uid for n in network.nodes() if isinstance(n, Edfa)]
 
     corresp_roadm = {x.city: [f'roadm {x.city}'] for x in nodes
                      if x.node_type.lower() == 'roadm'}
-    corresp_fused = {x.city: [f'west fused spans in {x.city}', f'east fused spans in {x.city}']
+    corresp_fused = {x.city: [f'west fused spans in {x.city}{pair_string(x)}',
+                              f'east fused spans in {x.city}{pair_string(x)}']
                      for x in nodes if x.node_type.lower() == 'fused'
-                     and f'west fused spans in {x.city}' in fused
-                     and f'east fused spans in {x.city}' in fused}
+                     and f'west fused spans in {x.city}{pair_string(x)}' in fused
+                     and f'east fused spans in {x.city}{pair_string(x)}' in fused}
     corresp_ila = defaultdict(list)
     # add the special cases when an ila is changed into a fused
     for my_e in eqpts:
-        name = f'east edfa in {my_e.from_city} to {my_e.to_city}'
+        name = f'east edfa in {my_e.from_city} to {my_e.to_city}{pair_string(my_e)}'
         if my_e.east_amp_type.lower() == 'fused' and name in fused:
             corresp_fused.get(my_e.from_city, []).append(name)
-        name = f'west edfa in {my_e.from_city} to {my_e.to_city}'
+        name = f'west edfa in {my_e.from_city} to {my_e.to_city}{pair_string(my_e)}'
         if my_e.west_amp_type.lower() == 'fused' and name in fused:
             corresp_fused.get(my_e.from_city, []).append(name)
     # build corresp ila based on eqpt sheet
     # start with east direction
     for my_e in eqpts:
-        for name in [f'east edfa in {my_e.from_city} to {my_e.to_city}',
-                     f'west edfa in {my_e.from_city} to {my_e.to_city}']:
-            if name in ila:
-                corresp_ila[my_e.from_city].append(name)
+        for name in [f'east edfa in {my_e.from_city} to {my_e.to_city}{pair_string(my_e)}',
+                     f'west edfa in {my_e.from_city} to {my_e.to_city}{pair_string(my_e)}']:
+            for element in ila:
+                if name in element:
+                    corresp_ila[my_e.from_city].append(element)
     # complete with potential autodesign names: amplifiers
     for my_l in links:
         # create names whatever the type and filter them out
         # from-to direction
         names = [
-            f'Edfa_preamp_roadm {my_l.from_city}_from_fiber ({my_l.to_city} -> {my_l.from_city})-{my_l.west_cable}',
-            f'Edfa_booster_roadm {my_l.from_city}_to_fiber ({my_l.from_city} -> {my_l.to_city})-{my_l.east_cable}']
+            f'Edfa_preamp_roadm {my_l.from_city}_from_fiber ({my_l.to_city} -> {my_l.from_city})-{my_l.west_cable}{pair_string(my_e)}',  # noqa E501
+            f'Edfa_booster_roadm {my_l.from_city}_to_fiber ({my_l.from_city} -> {my_l.to_city})-{my_l.east_cable}{pair_string(my_e)}']   # noqa E501
         for name in names:
-            if name in ila:
-                # "east edfa in Stbrieuc to Rennes_STA"  is equivalent name as
-                # "Edfa_booster_roadm Stbrieuc_to_fiber (Lannion_CAS → Stbrieuc)-F056"
-                # "west edfa in Stbrieuc to Rennes_STA"  is equivalent name as
-                # "Edfa_preamp_roadm Stbrieuc_to_fiber (Rennes_STA → Stbrieuc)-F057"
-                # in case fibers are splitted the name here is a
-                corresp_ila[my_l.from_city].append(name)
+            for element in ila:
+                if name in element:
+                    # "east edfa in Stbrieuc to Rennes_STA"  is equivalent name as
+                    # "Edfa_booster_roadm Stbrieuc_to_fiber (Lannion_CAS → Stbrieuc)-F056"
+                    # "west edfa in Stbrieuc to Rennes_STA"  is equivalent name as
+                    # "Edfa_preamp_roadm Stbrieuc_to_fiber (Rennes_STA → Stbrieuc)-F057"
+                    # in case fibers are splitted the name here is a prefix
+                    corresp_ila[my_l.from_city].append(element)
+                    break
         # to-from direction
-        names = [f'Edfa_preamp_roadm {my_l.to_city}_from_fiber ({my_l.from_city} -> {my_l.to_city})-{my_l.east_cable}',
-                 f'Edfa_booster_roadm {my_l.to_city}_to_fiber ({my_l.to_city} -> {my_l.from_city})-{my_l.west_cable}']
+        names = [f'Edfa_preamp_roadm {my_l.to_city}_from_fiber ({my_l.from_city} -> {my_l.to_city})-{my_l.east_cable}{pair_string(my_e)}',  # noqa E501
+                 f'Edfa_booster_roadm {my_l.to_city}_to_fiber ({my_l.to_city} -> {my_l.from_city})-{my_l.west_cable}{pair_string(my_e)}']   # noqa E501
         for name in names:
-            if name in ila:
-                corresp_ila[my_l.to_city].append(name)
+            for element in ila:
+                if name in element:
+                    corresp_ila[my_l.to_city].append(element)
+                    break
     for node in nodes:
-        names = [f'east edfa in {node.city}', f'west edfa in {node.city}']
+        names = [f'east edfa in {node.city}{pair_string(node)}', f'west edfa in {node.city}{pair_string(node)}']
         for name in names:
-            if name in ila:
-                # "east edfa in Stbrieuc to Rennes_STA" (created with Eqpt) is equivalent name as
-                # "east edfa in Stbrieuc" or "west edfa in Stbrieuc" (created with Links sheet)
-                # depending on link node order
-                corresp_ila[node.city].append(name)
+            for element in ila:
+                if name in element:
+                    # "east edfa in Stbrieuc to Rennes_STA" (created with Eqpt) is equivalent name as
+                    # "east edfa in Stbrieuc" or "west edfa in Stbrieuc" (created with Links sheet)
+                    # depending on link node order
+                    corresp_ila[node.city].append(element)
+                    break
 
     # merge fused with ila:
     for key, val in corresp_fused.items():
@@ -1649,7 +1658,31 @@ def eqpt_in_city_to_city(in_city: str, to_city: str,
     return return_eqpt
 
 
-def corresp_next_node(network: DiGraph, corresp_ila: dict, corresp_roadm: dict) -> Tuple[dict, dict]:
+def _is_known_uid(uid: str, corresp_roadm: dict, corresp_ila: dict) -> bool:
+    """Check whether uid matches a name coming from the Excel-based naming
+    (ROADM booster/preamp, or explicit ILA edfa), even as a prefix (fiber
+    splitting adds a suffix to the uid).
+
+    Returns False for amplifiers that were purely added by autodesign
+    because of fiber splitting (uid like 'Edfa_fiber (...)- (n/N)') and that
+    have no corresponding Excel-based name.
+
+    :param uid: network node uid
+    :type uid: str
+    :param corresp_roadm: Excel-based naming correspondance for ROADMs
+    :type corresp_roadm: dict
+    :param corresp_ila: Excel-based naming correspondance for ILAs
+    :type corresp_ila: dict
+    :return: Returns False for amplifiers that were purely added by autodesign
+    :rtype: bool
+    """
+    for values in list(corresp_roadm.values()) + list(corresp_ila.values()):
+        if any(name in uid for name in values):
+            return True
+    return False
+
+
+def corresp_next_node(network: DiGraph, corresp_ila: dict, corresp_roadm: dict) -> tuple[dict, dict]:
     """Find the next node in the network for each name in the correspondence dictionaries.
     For each name in corresp dictionnaries find the next node in network and its name
     given by user in excel. for meshTopology_exampleV2.xls:
@@ -1689,33 +1722,26 @@ def corresp_next_node(network: DiGraph, corresp_ila: dict, corresp_roadm: dict) 
     :rtype: Tuple[dict, dict]
     """
     next_node = {}
-    # consolidate tables and create next_node table
     for ila_key, ila_list in corresp_ila.items():
         temp = copy(ila_list)
         for ila_elem in ila_list:
-            # find the node with ila_elem string _in_ the node uid. 'in' is used instead of
-            # '==' to find composed nodes due to fiber splitting in autodesign.
-            # eg if elem_ila is 'east edfa in Stbrieuc to Rennes_STA',
-            # node uid 'east edfa in Stbrieuc to Rennes_STA-_(1/2)' is possible
             correct_ila_name = next(n.uid for n in network.nodes() if ila_elem in n.uid)
             temp.remove(ila_elem)
             temp.append(correct_ila_name)
             ila_nd = next(n for n in network.nodes() if ila_elem in n.uid)
             next_nd = next(network.successors(ila_nd))
-            # search for the next ILA or ROADM
-            while isinstance(next_nd, (Fiber, Fused)):
+            # search for the next ILA or ROADM, skipping Fiber/Fused nodes AND
+            # the inline amplifiers added by autodesign because of fiber
+            # splitting (they have no Excel-based name).
+            while isinstance(next_nd, (Fiber, Fused)) or (
+                    isinstance(next_nd, Edfa) and not _is_known_uid(next_nd.uid, corresp_roadm, corresp_ila)):
                 next_nd = next(network.successors(next_nd))
-            # if next_nd is a ROADM, add the first found correspondance
             for key, val in corresp_roadm.items():
-                # val is a list of possible names associated with key
                 if next_nd.uid in val:
                     next_node[correct_ila_name] = key
                     break
-            # if next_nd was not already added in the dict with the previous loop,
-            # add the first found correspondance in ila names
             if correct_ila_name not in next_node:
                 for key, val in corresp_ila.items():
-                    # in case of splitted fibers the ila name might not be exact match
                     if [e for e in val if e in next_nd.uid]:
                         next_node[correct_ila_name] = key
                         break

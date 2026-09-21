@@ -1,0 +1,2090 @@
+{
+  "elements": [
+    {
+      "uid": "trx node1",
+      "type": "Transceiver",
+      "metadata": {
+        "location": {
+          "latitude": 1,
+          "longitude": 0,
+          "city": "node1",
+          "region": "RLD"
+        }
+      }
+    },
+    {
+      "uid": "trx node2",
+      "type": "Transceiver",
+      "metadata": {
+        "location": {
+          "latitude": 1.01,
+          "longitude": 0.01,
+          "city": "node2",
+          "region": "RLD"
+        }
+      }
+    },
+    {
+      "uid": "roadm node1",
+      "type": "Roadm",
+      "type_variety": "default",
+      "params": {
+        "target_pch_out_db": -20,
+        "restrictions": {
+          "preamp_variety_list": [],
+          "booster_variety_list": []
+        },
+        "per_degree_pch_out_db": {
+          "Edfa_booster_roadm node1_to_fiber (node1 -> siteA)-_(1/4)": -15,
+          "east edfa in node1 to siteD": -20,
+          "Edfa_booster_roadm node1_to_fiber (node1 -> siteE)-CABLES#19": -20,
+          "Edfa_booster_roadm node1_to_fiber (node1 -> siteF)-CABLES#20": -20,
+          "Edfa_booster_roadm node1_to_fiber (node1 -> siteC)-": -20
+        },
+        "degree-association": [
+          {
+            "degree": "east edfa in node1 to siteD",
+            "paired-degree": "west edfa in node1 to siteD"
+          },
+          {
+            "degree": "Edfa_booster_roadm node1_to_fiber (node1 -> siteF)-CABLES#20",
+            "paired-degree": "Edfa_preamp_roadm node1_from_fiber (siteF -> node1)-CABLES#20"
+          },
+          {
+            "degree": "Edfa_booster_roadm node1_to_fiber (node1 -> siteC)-",
+            "paired-degree": "Edfa_preamp_roadm node1_from_fiber (siteC -> node1)-"
+          },
+          {
+            "degree": "Edfa_booster_roadm node1_to_fiber (node1 -> siteA)-_(1/4)",
+            "paired-degree": "Edfa_preamp_roadm node1_from_fiber (siteA -> node1)-_(4/4)"
+          },
+          {
+            "degree": "Edfa_booster_roadm node1_to_fiber (node1 -> siteE)-CABLES#19",
+            "paired-degree": "Edfa_preamp_roadm node1_from_fiber (siteE -> node1)-CABLES#19"
+          }
+        ]
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1,
+          "longitude": 0,
+          "city": "node1",
+          "region": "RLD"
+        }
+      }
+    },
+    {
+      "uid": "roadm node2",
+      "type": "Roadm",
+      "type_variety": "default",
+      "params": {
+        "target_pch_out_db": -20,
+        "restrictions": {
+          "preamp_variety_list": [],
+          "booster_variety_list": []
+        },
+        "per_degree_pch_out_db": {
+          "east edfa in node2 to siteD": -20,
+          "Edfa_booster_roadm node2_to_fiber (node2 -> siteF)-CABLES#21": -20,
+          "Edfa_booster_roadm node2_to_fiber (node2 -> siteE)-CABLES#22": -20,
+          "Edfa_booster_roadm node2_to_fiber (node2 -> siteB)-": -20,
+          "Edfa_booster_roadm node2_to_fiber (node2 -> siteC)-": -20
+        },
+        "degree-association": [
+          {
+            "degree": "east edfa in node2 to siteD",
+            "paired-degree": "west edfa in node2 to siteD"
+          },
+          {
+            "degree": "Edfa_booster_roadm node2_to_fiber (node2 -> siteE)-CABLES#22",
+            "paired-degree": "Edfa_preamp_roadm node2_from_fiber (siteE -> node2)-CABLES#22"
+          },
+          {
+            "degree": "Edfa_booster_roadm node2_to_fiber (node2 -> siteB)-",
+            "paired-degree": "Edfa_preamp_roadm node2_from_fiber (siteB -> node2)-"
+          },
+          {
+            "degree": "Edfa_booster_roadm node2_to_fiber (node2 -> siteC)-",
+            "paired-degree": "Edfa_preamp_roadm node2_from_fiber (siteC -> node2)-"
+          },
+          {
+            "degree": "Edfa_booster_roadm node2_to_fiber (node2 -> siteF)-CABLES#21",
+            "paired-degree": "Edfa_preamp_roadm node2_from_fiber (siteF -> node2)-CABLES#21"
+          }
+        ]
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.01,
+          "longitude": 0.01,
+          "city": "node2",
+          "region": "RLD"
+        }
+      }
+    },
+    {
+      "uid": "fiber (node1 -> siteE)-CABLES#19",
+      "type": "Fiber",
+      "type_variety": "SSMF",
+      "params": {
+        "length": 58.839,
+        "length_units": "km",
+        "att_in": 0,
+        "con_in": 0,
+        "con_out": 0,
+        "loss_coef": 0.24
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.12,
+          "longitude": 0.12,
+          "city": null,
+          "region": null
+        }
+      }
+    },
+    {
+      "uid": "fiber (node1 -> siteF)-CABLES#20",
+      "type": "Fiber",
+      "type_variety": "SSMF",
+      "params": {
+        "length": 130.0,
+        "length_units": "km",
+        "att_in": 0,
+        "con_in": 0,
+        "con_out": 0,
+        "loss_coef": 0.24
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.125,
+          "longitude": 0.125,
+          "city": null,
+          "region": null
+        }
+      }
+    },
+    {
+      "uid": "fiber (siteF -> node2)-CABLES#21",
+      "type": "Fiber",
+      "type_variety": "SSMF",
+      "params": {
+        "length": 80.0,
+        "length_units": "km",
+        "att_in": 0,
+        "con_in": 0,
+        "con_out": 0,
+        "loss_coef": 0.24
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.13,
+          "longitude": 0.13,
+          "city": null,
+          "region": null
+        }
+      }
+    },
+    {
+      "uid": "fiber (siteE -> node2)-CABLES#22",
+      "type": "Fiber",
+      "type_variety": "SSMF",
+      "params": {
+        "length": 54.342,
+        "length_units": "km",
+        "att_in": 0,
+        "con_in": 0,
+        "con_out": 0,
+        "loss_coef": 0.24
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.125,
+          "longitude": 0.125,
+          "city": null,
+          "region": null
+        }
+      }
+    },
+    {
+      "uid": "fiber (siteB -> node2)-",
+      "type": "Fiber",
+      "type_variety": "SSMF",
+      "params": {
+        "length": 80.0,
+        "length_units": "km",
+        "att_in": 0,
+        "con_in": 0,
+        "con_out": 0,
+        "loss_coef": 0.2
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.13,
+          "longitude": 0.13,
+          "city": null,
+          "region": null
+        }
+      }
+    },
+    {
+      "uid": "fiber (node2 -> siteC)-",
+      "type": "Fiber",
+      "type_variety": "SSMF",
+      "params": {
+        "length": 80.0,
+        "length_units": "km",
+        "att_in": 0,
+        "con_in": 0,
+        "con_out": 0,
+        "loss_coef": 0.2
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.13,
+          "longitude": 0.13,
+          "city": null,
+          "region": null
+        }
+      }
+    },
+    {
+      "uid": "fiber (siteC -> node1)-",
+      "type": "Fiber",
+      "type_variety": "SSMF",
+      "params": {
+        "length": 80.0,
+        "length_units": "km",
+        "att_in": 0,
+        "con_in": 0,
+        "con_out": 0,
+        "loss_coef": 0.2
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.125,
+          "longitude": 0.125,
+          "city": null,
+          "region": null
+        }
+      }
+    },
+    {
+      "uid": "fiber (node2 -> siteD)-",
+      "type": "Fiber",
+      "type_variety": "SSMF",
+      "params": {
+        "length": 80.0,
+        "length_units": "km",
+        "att_in": 0,
+        "con_in": 0,
+        "con_out": 0,
+        "loss_coef": 0.2
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.13,
+          "longitude": 0.13,
+          "city": null,
+          "region": null
+        }
+      }
+    },
+    {
+      "uid": "fiber (siteD -> node1)-",
+      "type": "Fiber",
+      "type_variety": "SSMF",
+      "params": {
+        "length": 80.0,
+        "length_units": "km",
+        "att_in": 0,
+        "con_in": 0,
+        "con_out": 0,
+        "loss_coef": 0.2
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.125,
+          "longitude": 0.125,
+          "city": null,
+          "region": null
+        }
+      }
+    },
+    {
+      "uid": "fiber (siteE -> node1)-CABLES#19",
+      "type": "Fiber",
+      "type_variety": "SSMF",
+      "params": {
+        "length": 58.839,
+        "length_units": "km",
+        "att_in": 0,
+        "con_in": 0,
+        "con_out": 0,
+        "loss_coef": 0.24
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.12,
+          "longitude": 0.12,
+          "city": null,
+          "region": null
+        }
+      }
+    },
+    {
+      "uid": "fiber (siteF -> node1)-CABLES#20",
+      "type": "Fiber",
+      "type_variety": "SSMF",
+      "params": {
+        "length": 130.0,
+        "length_units": "km",
+        "att_in": 0,
+        "con_in": 0,
+        "con_out": 0,
+        "loss_coef": 0.24
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.125,
+          "longitude": 0.125,
+          "city": null,
+          "region": null
+        }
+      }
+    },
+    {
+      "uid": "fiber (node2 -> siteF)-CABLES#21",
+      "type": "Fiber",
+      "type_variety": "SSMF",
+      "params": {
+        "length": 80.0,
+        "length_units": "km",
+        "att_in": 0,
+        "con_in": 0,
+        "con_out": 0,
+        "loss_coef": 0.24
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.13,
+          "longitude": 0.13,
+          "city": null,
+          "region": null
+        }
+      }
+    },
+    {
+      "uid": "fiber (node2 -> siteE)-CABLES#22",
+      "type": "Fiber",
+      "type_variety": "SSMF",
+      "params": {
+        "length": 54.342,
+        "length_units": "km",
+        "att_in": 0,
+        "con_in": 0,
+        "con_out": 0,
+        "loss_coef": 0.24
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.125,
+          "longitude": 0.125,
+          "city": null,
+          "region": null
+        }
+      }
+    },
+    {
+      "uid": "fiber (node2 -> siteB)-",
+      "type": "Fiber",
+      "type_variety": "SSMF",
+      "params": {
+        "length": 80.0,
+        "length_units": "km",
+        "att_in": 0,
+        "con_in": 0,
+        "con_out": 0,
+        "loss_coef": 0.2
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.13,
+          "longitude": 0.13,
+          "city": null,
+          "region": null
+        }
+      }
+    },
+    {
+      "uid": "fiber (siteC -> node2)-",
+      "type": "Fiber",
+      "type_variety": "SSMF",
+      "params": {
+        "length": 80.0,
+        "length_units": "km",
+        "att_in": 0,
+        "con_in": 0,
+        "con_out": 0,
+        "loss_coef": 0.2
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.13,
+          "longitude": 0.13,
+          "city": null,
+          "region": null
+        }
+      }
+    },
+    {
+      "uid": "fiber (node1 -> siteC)-",
+      "type": "Fiber",
+      "type_variety": "SSMF",
+      "params": {
+        "length": 80.0,
+        "length_units": "km",
+        "att_in": 0,
+        "con_in": 0,
+        "con_out": 0,
+        "loss_coef": 0.2
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.125,
+          "longitude": 0.125,
+          "city": null,
+          "region": null
+        }
+      }
+    },
+    {
+      "uid": "fiber (siteD -> node2)-",
+      "type": "Fiber",
+      "type_variety": "SSMF",
+      "params": {
+        "length": 80.0,
+        "length_units": "km",
+        "att_in": 0,
+        "con_in": 0,
+        "con_out": 0,
+        "loss_coef": 0.2
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.13,
+          "longitude": 0.13,
+          "city": null,
+          "region": null
+        }
+      }
+    },
+    {
+      "uid": "fiber (node1 -> siteD)-",
+      "type": "Fiber",
+      "type_variety": "SSMF",
+      "params": {
+        "length": 80.0,
+        "length_units": "km",
+        "att_in": 0,
+        "con_in": 0,
+        "con_out": 0,
+        "loss_coef": 0.2
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.125,
+          "longitude": 0.125,
+          "city": null,
+          "region": null
+        }
+      }
+    },
+    {
+      "uid": "west edfa in siteE",
+      "type": "Edfa",
+      "type_variety": "std_low_gain",
+      "operational": {
+        "gain_target": 14.12136,
+        "delta_p": null,
+        "tilt_target": 0,
+        "out_voa": 0,
+        "in_voa": 0
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.24,
+          "longitude": 0.24,
+          "city": "siteE",
+          "region": "RLD"
+        }
+      }
+    },
+    {
+      "uid": "west edfa in siteF",
+      "type": "Edfa",
+      "type_variety": "std_medium_gain",
+      "operational": {
+        "gain_target": 28.5,
+        "delta_p": null,
+        "tilt_target": 0,
+        "out_voa": 0,
+        "in_voa": 0
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.25,
+          "longitude": 0.25,
+          "city": "siteF",
+          "region": "RLD"
+        }
+      }
+    },
+    {
+      "uid": "west edfa in siteA",
+      "type": "Edfa",
+      "type_variety": "test_fixed_gain",
+      "operational": {
+        "gain_target": 20.0,
+        "delta_p": null,
+        "tilt_target": 0,
+        "out_voa": 0,
+        "in_voa": 0
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.25,
+          "longitude": 0.25,
+          "city": "siteA",
+          "region": "RLD"
+        }
+      }
+    },
+    {
+      "uid": "west edfa in siteB",
+      "type": "Edfa",
+      "type_variety": "test_fixed_gain",
+      "operational": {
+        "gain_target": 20.0,
+        "delta_p": null,
+        "tilt_target": 0,
+        "out_voa": 0,
+        "in_voa": 0
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.25,
+          "longitude": 0.25,
+          "city": "siteB",
+          "region": "RLD"
+        }
+      }
+    },
+    {
+      "uid": "west edfa in siteC",
+      "type": "Edfa",
+      "type_variety": "std_low_gain",
+      "operational": {
+        "gain_target": 16.0,
+        "delta_p": null,
+        "tilt_target": 0,
+        "out_voa": 0,
+        "in_voa": 0
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.25,
+          "longitude": 0.25,
+          "city": "siteC",
+          "region": "RLD"
+        }
+      }
+    },
+    {
+      "uid": "east edfa in siteE",
+      "type": "Edfa",
+      "type_variety": "std_low_gain",
+      "operational": {
+        "gain_target": 13.04208,
+        "delta_p": null,
+        "tilt_target": 0,
+        "out_voa": 0,
+        "in_voa": 0
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.24,
+          "longitude": 0.24,
+          "city": "siteE",
+          "region": "RLD"
+        }
+      }
+    },
+    {
+      "uid": "east edfa in siteF",
+      "type": "Edfa",
+      "type_variety": "test_fixed_gain",
+      "operational": {
+        "gain_target": 19.2,
+        "delta_p": null,
+        "tilt_target": 0,
+        "out_voa": 0,
+        "in_voa": 0
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.25,
+          "longitude": 0.25,
+          "city": "siteF",
+          "region": "RLD"
+        }
+      }
+    },
+    {
+      "uid": "east edfa in siteA",
+      "type": "Edfa",
+      "type_variety": "test_fixed_gain",
+      "operational": {
+        "gain_target": 20.0,
+        "delta_p": null,
+        "tilt_target": 0,
+        "out_voa": 0,
+        "in_voa": 0
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.25,
+          "longitude": 0.25,
+          "city": "siteA",
+          "region": "RLD"
+        }
+      }
+    },
+    {
+      "uid": "east edfa in siteB",
+      "type": "Edfa",
+      "type_variety": "std_low_gain",
+      "operational": {
+        "gain_target": 16.0,
+        "delta_p": null,
+        "tilt_target": 0,
+        "out_voa": 0,
+        "in_voa": 0
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.25,
+          "longitude": 0.25,
+          "city": "siteB",
+          "region": "RLD"
+        }
+      }
+    },
+    {
+      "uid": "east edfa in siteC",
+      "type": "Edfa",
+      "type_variety": "std_low_gain",
+      "operational": {
+        "gain_target": 16.0,
+        "delta_p": null,
+        "tilt_target": 0,
+        "out_voa": 0,
+        "in_voa": 0
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.25,
+          "longitude": 0.25,
+          "city": "siteC",
+          "region": "RLD"
+        }
+      }
+    },
+    {
+      "uid": "east edfa in node2 to siteD",
+      "type": "Edfa",
+      "type_variety": "test_fixed_gain",
+      "operational": {
+        "gain_target": 20.0,
+        "delta_p": null,
+        "tilt_target": 0,
+        "out_voa": 0,
+        "in_voa": 0
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.01,
+          "longitude": 0.01,
+          "city": "node2",
+          "region": "RLD"
+        }
+      }
+    },
+    {
+      "uid": "east edfa in node1 to siteD",
+      "type": "Edfa",
+      "type_variety": "test_fixed_gain",
+      "operational": {
+        "gain_target": 20.0,
+        "delta_p": null,
+        "tilt_target": 0,
+        "out_voa": 0,
+        "in_voa": 0
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1,
+          "longitude": 0,
+          "city": "node1",
+          "region": "RLD"
+        }
+      }
+    },
+    {
+      "uid": "east edfa in siteD to node1",
+      "type": "Edfa",
+      "type_variety": "std_low_gain",
+      "operational": {
+        "gain_target": 16.0,
+        "delta_p": null,
+        "tilt_target": 0,
+        "out_voa": 0,
+        "in_voa": 0
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.25,
+          "longitude": 0.25,
+          "city": "siteD",
+          "region": "RLD"
+        }
+      }
+    },
+    {
+      "uid": "west edfa in node2 to siteD",
+      "type": "Edfa",
+      "type_variety": "std_low_gain",
+      "operational": {
+        "gain_target": 16.0,
+        "delta_p": null,
+        "tilt_target": 0,
+        "out_voa": 0,
+        "in_voa": 0
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.01,
+          "longitude": 0.01,
+          "city": "node2",
+          "region": "RLD"
+        }
+      }
+    },
+    {
+      "uid": "west edfa in node1 to siteD",
+      "type": "Edfa",
+      "type_variety": "std_low_gain",
+      "operational": {
+        "gain_target": 16.0,
+        "delta_p": null,
+        "tilt_target": 0,
+        "out_voa": 0,
+        "in_voa": 0
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1,
+          "longitude": 0,
+          "city": "node1",
+          "region": "RLD"
+        }
+      }
+    },
+    {
+      "uid": "west edfa in siteD to node1",
+      "type": "Edfa",
+      "type_variety": "std_low_gain",
+      "operational": {
+        "gain_target": 16.0,
+        "delta_p": null,
+        "tilt_target": 0,
+        "out_voa": 0,
+        "in_voa": 0
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.25,
+          "longitude": 0.25,
+          "city": "siteD",
+          "region": "RLD"
+        }
+      }
+    },
+    {
+      "uid": "fiber (node1 -> siteA)-_(1/4)",
+      "type": "Fiber",
+      "type_variety": "SSMF",
+      "params": {
+        "length": 100.0,
+        "length_units": "km",
+        "att_in": 0,
+        "con_in": 0,
+        "con_out": 0,
+        "loss_coef": 0.2
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.03125,
+          "longitude": 0.03125,
+          "city": null,
+          "region": null
+        }
+      }
+    },
+    {
+      "uid": "fiber (node1 -> siteA)-_(2/4)",
+      "type": "Fiber",
+      "type_variety": "SSMF",
+      "params": {
+        "length": 100.0,
+        "length_units": "km",
+        "att_in": 0,
+        "con_in": 0,
+        "con_out": 0,
+        "loss_coef": 0.2
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.09375,
+          "longitude": 0.09375,
+          "city": null,
+          "region": null
+        }
+      }
+    },
+    {
+      "uid": "fiber (node1 -> siteA)-_(3/4)",
+      "type": "Fiber",
+      "type_variety": "SSMF",
+      "params": {
+        "length": 100.0,
+        "length_units": "km",
+        "att_in": 0,
+        "con_in": 0,
+        "con_out": 0,
+        "loss_coef": 0.2
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.15625,
+          "longitude": 0.15625,
+          "city": null,
+          "region": null
+        }
+      }
+    },
+    {
+      "uid": "fiber (node1 -> siteA)-_(4/4)",
+      "type": "Fiber",
+      "type_variety": "SSMF",
+      "params": {
+        "length": 100.0,
+        "length_units": "km",
+        "att_in": 0,
+        "con_in": 0,
+        "con_out": 0,
+        "loss_coef": 0.2
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.21875,
+          "longitude": 0.21875,
+          "city": null,
+          "region": null
+        }
+      }
+    },
+    {
+      "uid": "fiber (siteA -> siteB)-_(1/4)",
+      "type": "Fiber",
+      "type_variety": "SSMF",
+      "params": {
+        "length": 100.0,
+        "length_units": "km",
+        "att_in": 0,
+        "con_in": 0,
+        "con_out": 0,
+        "loss_coef": 0.2
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.25,
+          "longitude": 0.25,
+          "city": null,
+          "region": null
+        }
+      }
+    },
+    {
+      "uid": "fiber (siteA -> siteB)-_(2/4)",
+      "type": "Fiber",
+      "type_variety": "SSMF",
+      "params": {
+        "length": 100.0,
+        "length_units": "km",
+        "att_in": 0,
+        "con_in": 0,
+        "con_out": 0,
+        "loss_coef": 0.2
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.25,
+          "longitude": 0.25,
+          "city": null,
+          "region": null
+        }
+      }
+    },
+    {
+      "uid": "fiber (siteA -> siteB)-_(3/4)",
+      "type": "Fiber",
+      "type_variety": "SSMF",
+      "params": {
+        "length": 100.0,
+        "length_units": "km",
+        "att_in": 0,
+        "con_in": 0,
+        "con_out": 0,
+        "loss_coef": 0.2
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.25,
+          "longitude": 0.25,
+          "city": null,
+          "region": null
+        }
+      }
+    },
+    {
+      "uid": "fiber (siteA -> siteB)-_(4/4)",
+      "type": "Fiber",
+      "type_variety": "SSMF",
+      "params": {
+        "length": 100.0,
+        "length_units": "km",
+        "att_in": 0,
+        "con_in": 0,
+        "con_out": 0,
+        "loss_coef": 0.2
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.25,
+          "longitude": 0.25,
+          "city": null,
+          "region": null
+        }
+      }
+    },
+    {
+      "uid": "fiber (siteA -> node1)-_(1/4)",
+      "type": "Fiber",
+      "type_variety": "SSMF",
+      "params": {
+        "length": 100.0,
+        "length_units": "km",
+        "att_in": 0,
+        "con_in": 0,
+        "con_out": 0,
+        "loss_coef": 0.2
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.21875,
+          "longitude": 0.21875,
+          "city": null,
+          "region": null
+        }
+      }
+    },
+    {
+      "uid": "fiber (siteA -> node1)-_(2/4)",
+      "type": "Fiber",
+      "type_variety": "SSMF",
+      "params": {
+        "length": 100.0,
+        "length_units": "km",
+        "att_in": 0,
+        "con_in": 0,
+        "con_out": 0,
+        "loss_coef": 0.2
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.15625,
+          "longitude": 0.15625,
+          "city": null,
+          "region": null
+        }
+      }
+    },
+    {
+      "uid": "fiber (siteA -> node1)-_(3/4)",
+      "type": "Fiber",
+      "type_variety": "SSMF",
+      "params": {
+        "length": 100.0,
+        "length_units": "km",
+        "att_in": 0,
+        "con_in": 0,
+        "con_out": 0,
+        "loss_coef": 0.2
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.09375,
+          "longitude": 0.09375,
+          "city": null,
+          "region": null
+        }
+      }
+    },
+    {
+      "uid": "fiber (siteA -> node1)-_(4/4)",
+      "type": "Fiber",
+      "type_variety": "SSMF",
+      "params": {
+        "length": 100.0,
+        "length_units": "km",
+        "att_in": 0,
+        "con_in": 0,
+        "con_out": 0,
+        "loss_coef": 0.2
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.03125,
+          "longitude": 0.03125,
+          "city": null,
+          "region": null
+        }
+      }
+    },
+    {
+      "uid": "fiber (siteB -> siteA)-_(1/4)",
+      "type": "Fiber",
+      "type_variety": "SSMF",
+      "params": {
+        "length": 100.0,
+        "length_units": "km",
+        "att_in": 0,
+        "con_in": 0,
+        "con_out": 0,
+        "loss_coef": 0.2
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.25,
+          "longitude": 0.25,
+          "city": null,
+          "region": null
+        }
+      }
+    },
+    {
+      "uid": "fiber (siteB -> siteA)-_(2/4)",
+      "type": "Fiber",
+      "type_variety": "SSMF",
+      "params": {
+        "length": 100.0,
+        "length_units": "km",
+        "att_in": 0,
+        "con_in": 0,
+        "con_out": 0,
+        "loss_coef": 0.2
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.25,
+          "longitude": 0.25,
+          "city": null,
+          "region": null
+        }
+      }
+    },
+    {
+      "uid": "fiber (siteB -> siteA)-_(3/4)",
+      "type": "Fiber",
+      "type_variety": "SSMF",
+      "params": {
+        "length": 100.0,
+        "length_units": "km",
+        "att_in": 0,
+        "con_in": 0,
+        "con_out": 0,
+        "loss_coef": 0.2
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.25,
+          "longitude": 0.25,
+          "city": null,
+          "region": null
+        }
+      }
+    },
+    {
+      "uid": "fiber (siteB -> siteA)-_(4/4)",
+      "type": "Fiber",
+      "type_variety": "SSMF",
+      "params": {
+        "length": 100.0,
+        "length_units": "km",
+        "att_in": 0,
+        "con_in": 0,
+        "con_out": 0,
+        "loss_coef": 0.2
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.25,
+          "longitude": 0.25,
+          "city": null,
+          "region": null
+        }
+      }
+    },
+    {
+      "uid": "Edfa_preamp_roadm node1_from_fiber (siteE -> node1)-CABLES#19",
+      "type": "Edfa",
+      "type_variety": "std_low_gain",
+      "operational": {
+        "gain_target": 14.12136,
+        "delta_p": null,
+        "tilt_target": 0,
+        "out_voa": 0,
+        "in_voa": 0
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1,
+          "longitude": 0,
+          "city": "node1",
+          "region": "RLD"
+        }
+      }
+    },
+    {
+      "uid": "Edfa_preamp_roadm node1_from_fiber (siteF -> node1)-CABLES#20",
+      "type": "Edfa",
+      "type_variety": "std_medium_gain",
+      "operational": {
+        "gain_target": 28.5,
+        "delta_p": null,
+        "tilt_target": 0,
+        "out_voa": 0,
+        "in_voa": 0
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1,
+          "longitude": 0,
+          "city": "node1",
+          "region": "RLD"
+        }
+      }
+    },
+    {
+      "uid": "Edfa_preamp_roadm node1_from_fiber (siteC -> node1)-",
+      "type": "Edfa",
+      "type_variety": "std_low_gain",
+      "operational": {
+        "gain_target": 16.0,
+        "delta_p": null,
+        "tilt_target": 0,
+        "out_voa": 0,
+        "in_voa": 0
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1,
+          "longitude": 0,
+          "city": "node1",
+          "region": "RLD"
+        }
+      }
+    },
+    {
+      "uid": "Edfa_preamp_roadm node1_from_fiber (siteA -> node1)-_(4/4)",
+      "type": "Edfa",
+      "type_variety": "test_fixed_gain",
+      "operational": {
+        "gain_target": 20.0,
+        "delta_p": null,
+        "tilt_target": 0,
+        "out_voa": 0,
+        "in_voa": 0
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1,
+          "longitude": 0,
+          "city": "node1",
+          "region": "RLD"
+        }
+      }
+    },
+    {
+      "uid": "Edfa_booster_roadm node1_to_fiber (node1 -> siteE)-CABLES#19",
+      "type": "Edfa",
+      "type_variety": "test_fixed_gain",
+      "operational": {
+        "gain_target": 20.0,
+        "delta_p": null,
+        "tilt_target": 0,
+        "out_voa": 0,
+        "in_voa": 0
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1,
+          "longitude": 0,
+          "city": "node1",
+          "region": "RLD"
+        }
+      }
+    },
+    {
+      "uid": "Edfa_booster_roadm node1_to_fiber (node1 -> siteF)-CABLES#20",
+      "type": "Edfa",
+      "type_variety": "test_fixed_gain",
+      "operational": {
+        "gain_target": 20.0,
+        "delta_p": null,
+        "tilt_target": 0,
+        "out_voa": 0,
+        "in_voa": 0
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1,
+          "longitude": 0,
+          "city": "node1",
+          "region": "RLD"
+        }
+      }
+    },
+    {
+      "uid": "Edfa_booster_roadm node1_to_fiber (node1 -> siteC)-",
+      "type": "Edfa",
+      "type_variety": "test_fixed_gain",
+      "operational": {
+        "gain_target": 20.0,
+        "delta_p": null,
+        "tilt_target": 0,
+        "out_voa": 0,
+        "in_voa": 0
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1,
+          "longitude": 0,
+          "city": "node1",
+          "region": "RLD"
+        }
+      }
+    },
+    {
+      "uid": "Edfa_booster_roadm node1_to_fiber (node1 -> siteA)-_(1/4)",
+      "type": "Edfa",
+      "type_variety": "std_low_gain",
+      "operational": {
+        "gain_target": 15.0,
+        "delta_p": null,
+        "tilt_target": 0,
+        "out_voa": 0,
+        "in_voa": 0
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1,
+          "longitude": 0,
+          "city": "node1",
+          "region": "RLD"
+        }
+      }
+    },
+    {
+      "uid": "Edfa_preamp_roadm node2_from_fiber (siteF -> node2)-CABLES#21",
+      "type": "Edfa",
+      "type_variety": "test_fixed_gain",
+      "operational": {
+        "gain_target": 21.9,
+        "delta_p": null,
+        "tilt_target": 0,
+        "out_voa": 0,
+        "in_voa": 0
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.01,
+          "longitude": 0.01,
+          "city": "node2",
+          "region": "RLD"
+        }
+      }
+    },
+    {
+      "uid": "Edfa_preamp_roadm node2_from_fiber (siteE -> node2)-CABLES#22",
+      "type": "Edfa",
+      "type_variety": "std_low_gain",
+      "operational": {
+        "gain_target": 13.04208,
+        "delta_p": null,
+        "tilt_target": 0,
+        "out_voa": 0,
+        "in_voa": 0
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.01,
+          "longitude": 0.01,
+          "city": "node2",
+          "region": "RLD"
+        }
+      }
+    },
+    {
+      "uid": "Edfa_preamp_roadm node2_from_fiber (siteB -> node2)-",
+      "type": "Edfa",
+      "type_variety": "std_low_gain",
+      "operational": {
+        "gain_target": 16.0,
+        "delta_p": null,
+        "tilt_target": 0,
+        "out_voa": 0,
+        "in_voa": 0
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.01,
+          "longitude": 0.01,
+          "city": "node2",
+          "region": "RLD"
+        }
+      }
+    },
+    {
+      "uid": "Edfa_preamp_roadm node2_from_fiber (siteC -> node2)-",
+      "type": "Edfa",
+      "type_variety": "std_low_gain",
+      "operational": {
+        "gain_target": 16.0,
+        "delta_p": null,
+        "tilt_target": 0,
+        "out_voa": 0,
+        "in_voa": 0
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.01,
+          "longitude": 0.01,
+          "city": "node2",
+          "region": "RLD"
+        }
+      }
+    },
+    {
+      "uid": "Edfa_booster_roadm node2_to_fiber (node2 -> siteF)-CABLES#21",
+      "type": "Edfa",
+      "type_variety": "test_fixed_gain",
+      "operational": {
+        "gain_target": 20.0,
+        "delta_p": null,
+        "tilt_target": 0,
+        "out_voa": 0,
+        "in_voa": 0
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.01,
+          "longitude": 0.01,
+          "city": "node2",
+          "region": "RLD"
+        }
+      }
+    },
+    {
+      "uid": "Edfa_booster_roadm node2_to_fiber (node2 -> siteE)-CABLES#22",
+      "type": "Edfa",
+      "type_variety": "test_fixed_gain",
+      "operational": {
+        "gain_target": 20.0,
+        "delta_p": null,
+        "tilt_target": 0,
+        "out_voa": 0,
+        "in_voa": 0
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.01,
+          "longitude": 0.01,
+          "city": "node2",
+          "region": "RLD"
+        }
+      }
+    },
+    {
+      "uid": "Edfa_booster_roadm node2_to_fiber (node2 -> siteB)-",
+      "type": "Edfa",
+      "type_variety": "test_fixed_gain",
+      "operational": {
+        "gain_target": 20.0,
+        "delta_p": null,
+        "tilt_target": 0,
+        "out_voa": 0,
+        "in_voa": 0
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.01,
+          "longitude": 0.01,
+          "city": "node2",
+          "region": "RLD"
+        }
+      }
+    },
+    {
+      "uid": "Edfa_booster_roadm node2_to_fiber (node2 -> siteC)-",
+      "type": "Edfa",
+      "type_variety": "test_fixed_gain",
+      "operational": {
+        "gain_target": 20.0,
+        "delta_p": null,
+        "tilt_target": 0,
+        "out_voa": 0,
+        "in_voa": 0
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.01,
+          "longitude": 0.01,
+          "city": "node2",
+          "region": "RLD"
+        }
+      }
+    },
+    {
+      "uid": "Edfa_fiber (node1 -> siteA)-_(1/4)",
+      "type": "Edfa",
+      "type_variety": "test_fixed_gain",
+      "operational": {
+        "gain_target": 20.0,
+        "delta_p": null,
+        "tilt_target": 0,
+        "out_voa": 0,
+        "in_voa": 0
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.0625,
+          "longitude": 0.0625,
+          "city": null,
+          "region": null
+        }
+      }
+    },
+    {
+      "uid": "Edfa_fiber (node1 -> siteA)-_(2/4)",
+      "type": "Edfa",
+      "type_variety": "test_fixed_gain",
+      "operational": {
+        "gain_target": 20.0,
+        "delta_p": null,
+        "tilt_target": 0,
+        "out_voa": 0,
+        "in_voa": 0
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.125,
+          "longitude": 0.125,
+          "city": null,
+          "region": null
+        }
+      }
+    },
+    {
+      "uid": "Edfa_fiber (node1 -> siteA)-_(3/4)",
+      "type": "Edfa",
+      "type_variety": "test_fixed_gain",
+      "operational": {
+        "gain_target": 20.0,
+        "delta_p": null,
+        "tilt_target": 0,
+        "out_voa": 0,
+        "in_voa": 0
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.1875,
+          "longitude": 0.1875,
+          "city": null,
+          "region": null
+        }
+      }
+    },
+    {
+      "uid": "Edfa_fiber (siteA -> siteB)-_(1/4)",
+      "type": "Edfa",
+      "type_variety": "test_fixed_gain",
+      "operational": {
+        "gain_target": 20.0,
+        "delta_p": null,
+        "tilt_target": 0,
+        "out_voa": 0,
+        "in_voa": 0
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.25,
+          "longitude": 0.25,
+          "city": null,
+          "region": null
+        }
+      }
+    },
+    {
+      "uid": "Edfa_fiber (siteA -> siteB)-_(2/4)",
+      "type": "Edfa",
+      "type_variety": "test_fixed_gain",
+      "operational": {
+        "gain_target": 20.0,
+        "delta_p": null,
+        "tilt_target": 0,
+        "out_voa": 0,
+        "in_voa": 0
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.25,
+          "longitude": 0.25,
+          "city": null,
+          "region": null
+        }
+      }
+    },
+    {
+      "uid": "Edfa_fiber (siteA -> siteB)-_(3/4)",
+      "type": "Edfa",
+      "type_variety": "test_fixed_gain",
+      "operational": {
+        "gain_target": 20.0,
+        "delta_p": null,
+        "tilt_target": 0,
+        "out_voa": 0,
+        "in_voa": 0
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.25,
+          "longitude": 0.25,
+          "city": null,
+          "region": null
+        }
+      }
+    },
+    {
+      "uid": "Edfa_fiber (siteA -> node1)-_(1/4)",
+      "type": "Edfa",
+      "type_variety": "test_fixed_gain",
+      "operational": {
+        "gain_target": 20.0,
+        "delta_p": null,
+        "tilt_target": 0,
+        "out_voa": 0,
+        "in_voa": 0
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.1875,
+          "longitude": 0.1875,
+          "city": null,
+          "region": null
+        }
+      }
+    },
+    {
+      "uid": "Edfa_fiber (siteA -> node1)-_(2/4)",
+      "type": "Edfa",
+      "type_variety": "test_fixed_gain",
+      "operational": {
+        "gain_target": 20.0,
+        "delta_p": null,
+        "tilt_target": 0,
+        "out_voa": 0,
+        "in_voa": 0
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.125,
+          "longitude": 0.125,
+          "city": null,
+          "region": null
+        }
+      }
+    },
+    {
+      "uid": "Edfa_fiber (siteA -> node1)-_(3/4)",
+      "type": "Edfa",
+      "type_variety": "test_fixed_gain",
+      "operational": {
+        "gain_target": 20.0,
+        "delta_p": null,
+        "tilt_target": 0,
+        "out_voa": 0,
+        "in_voa": 0
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.0625,
+          "longitude": 0.0625,
+          "city": null,
+          "region": null
+        }
+      }
+    },
+    {
+      "uid": "Edfa_fiber (siteB -> siteA)-_(1/4)",
+      "type": "Edfa",
+      "type_variety": "test_fixed_gain",
+      "operational": {
+        "gain_target": 20.0,
+        "delta_p": null,
+        "tilt_target": 0,
+        "out_voa": 0,
+        "in_voa": 0
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.25,
+          "longitude": 0.25,
+          "city": null,
+          "region": null
+        }
+      }
+    },
+    {
+      "uid": "Edfa_fiber (siteB -> siteA)-_(2/4)",
+      "type": "Edfa",
+      "type_variety": "test_fixed_gain",
+      "operational": {
+        "gain_target": 20.0,
+        "delta_p": null,
+        "tilt_target": 0,
+        "out_voa": 0,
+        "in_voa": 0
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.25,
+          "longitude": 0.25,
+          "city": null,
+          "region": null
+        }
+      }
+    },
+    {
+      "uid": "Edfa_fiber (siteB -> siteA)-_(3/4)",
+      "type": "Edfa",
+      "type_variety": "test_fixed_gain",
+      "operational": {
+        "gain_target": 20.0,
+        "delta_p": null,
+        "tilt_target": 0,
+        "out_voa": 0,
+        "in_voa": 0
+      },
+      "metadata": {
+        "location": {
+          "latitude": 1.25,
+          "longitude": 0.25,
+          "city": null,
+          "region": null
+        }
+      }
+    }
+  ],
+  "connections": [
+    {
+      "from_node": "trx node1",
+      "to_node": "roadm node1"
+    },
+    {
+      "from_node": "trx node2",
+      "to_node": "roadm node2"
+    },
+    {
+      "from_node": "roadm node1",
+      "to_node": "east edfa in node1 to siteD"
+    },
+    {
+      "from_node": "roadm node1",
+      "to_node": "trx node1"
+    },
+    {
+      "from_node": "roadm node1",
+      "to_node": "Edfa_booster_roadm node1_to_fiber (node1 -> siteE)-CABLES#19"
+    },
+    {
+      "from_node": "roadm node1",
+      "to_node": "Edfa_booster_roadm node1_to_fiber (node1 -> siteF)-CABLES#20"
+    },
+    {
+      "from_node": "roadm node1",
+      "to_node": "Edfa_booster_roadm node1_to_fiber (node1 -> siteC)-"
+    },
+    {
+      "from_node": "roadm node1",
+      "to_node": "Edfa_booster_roadm node1_to_fiber (node1 -> siteA)-_(1/4)"
+    },
+    {
+      "from_node": "roadm node2",
+      "to_node": "east edfa in node2 to siteD"
+    },
+    {
+      "from_node": "roadm node2",
+      "to_node": "trx node2"
+    },
+    {
+      "from_node": "roadm node2",
+      "to_node": "Edfa_booster_roadm node2_to_fiber (node2 -> siteF)-CABLES#21"
+    },
+    {
+      "from_node": "roadm node2",
+      "to_node": "Edfa_booster_roadm node2_to_fiber (node2 -> siteE)-CABLES#22"
+    },
+    {
+      "from_node": "roadm node2",
+      "to_node": "Edfa_booster_roadm node2_to_fiber (node2 -> siteB)-"
+    },
+    {
+      "from_node": "roadm node2",
+      "to_node": "Edfa_booster_roadm node2_to_fiber (node2 -> siteC)-"
+    },
+    {
+      "from_node": "fiber (node1 -> siteE)-CABLES#19",
+      "to_node": "west edfa in siteE"
+    },
+    {
+      "from_node": "fiber (node1 -> siteF)-CABLES#20",
+      "to_node": "west edfa in siteF"
+    },
+    {
+      "from_node": "fiber (siteF -> node2)-CABLES#21",
+      "to_node": "Edfa_preamp_roadm node2_from_fiber (siteF -> node2)-CABLES#21"
+    },
+    {
+      "from_node": "fiber (siteE -> node2)-CABLES#22",
+      "to_node": "Edfa_preamp_roadm node2_from_fiber (siteE -> node2)-CABLES#22"
+    },
+    {
+      "from_node": "fiber (siteB -> node2)-",
+      "to_node": "Edfa_preamp_roadm node2_from_fiber (siteB -> node2)-"
+    },
+    {
+      "from_node": "fiber (node2 -> siteC)-",
+      "to_node": "west edfa in siteC"
+    },
+    {
+      "from_node": "fiber (siteC -> node1)-",
+      "to_node": "Edfa_preamp_roadm node1_from_fiber (siteC -> node1)-"
+    },
+    {
+      "from_node": "fiber (node2 -> siteD)-",
+      "to_node": "east edfa in siteD to node1"
+    },
+    {
+      "from_node": "fiber (siteD -> node1)-",
+      "to_node": "west edfa in node1 to siteD"
+    },
+    {
+      "from_node": "fiber (siteE -> node1)-CABLES#19",
+      "to_node": "Edfa_preamp_roadm node1_from_fiber (siteE -> node1)-CABLES#19"
+    },
+    {
+      "from_node": "fiber (siteF -> node1)-CABLES#20",
+      "to_node": "Edfa_preamp_roadm node1_from_fiber (siteF -> node1)-CABLES#20"
+    },
+    {
+      "from_node": "fiber (node2 -> siteF)-CABLES#21",
+      "to_node": "east edfa in siteF"
+    },
+    {
+      "from_node": "fiber (node2 -> siteE)-CABLES#22",
+      "to_node": "east edfa in siteE"
+    },
+    {
+      "from_node": "fiber (node2 -> siteB)-",
+      "to_node": "east edfa in siteB"
+    },
+    {
+      "from_node": "fiber (siteC -> node2)-",
+      "to_node": "Edfa_preamp_roadm node2_from_fiber (siteC -> node2)-"
+    },
+    {
+      "from_node": "fiber (node1 -> siteC)-",
+      "to_node": "east edfa in siteC"
+    },
+    {
+      "from_node": "fiber (siteD -> node2)-",
+      "to_node": "west edfa in node2 to siteD"
+    },
+    {
+      "from_node": "fiber (node1 -> siteD)-",
+      "to_node": "west edfa in siteD to node1"
+    },
+    {
+      "from_node": "west edfa in siteE",
+      "to_node": "fiber (siteE -> node2)-CABLES#22"
+    },
+    {
+      "from_node": "west edfa in siteF",
+      "to_node": "fiber (siteF -> node2)-CABLES#21"
+    },
+    {
+      "from_node": "west edfa in siteA",
+      "to_node": "fiber (siteA -> siteB)-_(1/4)"
+    },
+    {
+      "from_node": "west edfa in siteB",
+      "to_node": "fiber (siteB -> node2)-"
+    },
+    {
+      "from_node": "west edfa in siteC",
+      "to_node": "fiber (siteC -> node1)-"
+    },
+    {
+      "from_node": "east edfa in siteE",
+      "to_node": "fiber (siteE -> node1)-CABLES#19"
+    },
+    {
+      "from_node": "east edfa in siteF",
+      "to_node": "fiber (siteF -> node1)-CABLES#20"
+    },
+    {
+      "from_node": "east edfa in siteA",
+      "to_node": "fiber (siteA -> node1)-_(1/4)"
+    },
+    {
+      "from_node": "east edfa in siteB",
+      "to_node": "fiber (siteB -> siteA)-_(1/4)"
+    },
+    {
+      "from_node": "east edfa in siteC",
+      "to_node": "fiber (siteC -> node2)-"
+    },
+    {
+      "from_node": "east edfa in node2 to siteD",
+      "to_node": "fiber (node2 -> siteD)-"
+    },
+    {
+      "from_node": "east edfa in node1 to siteD",
+      "to_node": "fiber (node1 -> siteD)-"
+    },
+    {
+      "from_node": "east edfa in siteD to node1",
+      "to_node": "fiber (siteD -> node1)-"
+    },
+    {
+      "from_node": "west edfa in node2 to siteD",
+      "to_node": "roadm node2"
+    },
+    {
+      "from_node": "west edfa in node1 to siteD",
+      "to_node": "roadm node1"
+    },
+    {
+      "from_node": "west edfa in siteD to node1",
+      "to_node": "fiber (siteD -> node2)-"
+    },
+    {
+      "from_node": "fiber (node1 -> siteA)-_(1/4)",
+      "to_node": "Edfa_fiber (node1 -> siteA)-_(1/4)"
+    },
+    {
+      "from_node": "fiber (node1 -> siteA)-_(2/4)",
+      "to_node": "Edfa_fiber (node1 -> siteA)-_(2/4)"
+    },
+    {
+      "from_node": "fiber (node1 -> siteA)-_(3/4)",
+      "to_node": "Edfa_fiber (node1 -> siteA)-_(3/4)"
+    },
+    {
+      "from_node": "fiber (node1 -> siteA)-_(4/4)",
+      "to_node": "west edfa in siteA"
+    },
+    {
+      "from_node": "fiber (siteA -> siteB)-_(1/4)",
+      "to_node": "Edfa_fiber (siteA -> siteB)-_(1/4)"
+    },
+    {
+      "from_node": "fiber (siteA -> siteB)-_(2/4)",
+      "to_node": "Edfa_fiber (siteA -> siteB)-_(2/4)"
+    },
+    {
+      "from_node": "fiber (siteA -> siteB)-_(3/4)",
+      "to_node": "Edfa_fiber (siteA -> siteB)-_(3/4)"
+    },
+    {
+      "from_node": "fiber (siteA -> siteB)-_(4/4)",
+      "to_node": "west edfa in siteB"
+    },
+    {
+      "from_node": "fiber (siteA -> node1)-_(1/4)",
+      "to_node": "Edfa_fiber (siteA -> node1)-_(1/4)"
+    },
+    {
+      "from_node": "fiber (siteA -> node1)-_(2/4)",
+      "to_node": "Edfa_fiber (siteA -> node1)-_(2/4)"
+    },
+    {
+      "from_node": "fiber (siteA -> node1)-_(3/4)",
+      "to_node": "Edfa_fiber (siteA -> node1)-_(3/4)"
+    },
+    {
+      "from_node": "fiber (siteA -> node1)-_(4/4)",
+      "to_node": "Edfa_preamp_roadm node1_from_fiber (siteA -> node1)-_(4/4)"
+    },
+    {
+      "from_node": "fiber (siteB -> siteA)-_(1/4)",
+      "to_node": "Edfa_fiber (siteB -> siteA)-_(1/4)"
+    },
+    {
+      "from_node": "fiber (siteB -> siteA)-_(2/4)",
+      "to_node": "Edfa_fiber (siteB -> siteA)-_(2/4)"
+    },
+    {
+      "from_node": "fiber (siteB -> siteA)-_(3/4)",
+      "to_node": "Edfa_fiber (siteB -> siteA)-_(3/4)"
+    },
+    {
+      "from_node": "fiber (siteB -> siteA)-_(4/4)",
+      "to_node": "east edfa in siteA"
+    },
+    {
+      "from_node": "Edfa_preamp_roadm node1_from_fiber (siteE -> node1)-CABLES#19",
+      "to_node": "roadm node1"
+    },
+    {
+      "from_node": "Edfa_preamp_roadm node1_from_fiber (siteF -> node1)-CABLES#20",
+      "to_node": "roadm node1"
+    },
+    {
+      "from_node": "Edfa_preamp_roadm node1_from_fiber (siteC -> node1)-",
+      "to_node": "roadm node1"
+    },
+    {
+      "from_node": "Edfa_preamp_roadm node1_from_fiber (siteA -> node1)-_(4/4)",
+      "to_node": "roadm node1"
+    },
+    {
+      "from_node": "Edfa_booster_roadm node1_to_fiber (node1 -> siteE)-CABLES#19",
+      "to_node": "fiber (node1 -> siteE)-CABLES#19"
+    },
+    {
+      "from_node": "Edfa_booster_roadm node1_to_fiber (node1 -> siteF)-CABLES#20",
+      "to_node": "fiber (node1 -> siteF)-CABLES#20"
+    },
+    {
+      "from_node": "Edfa_booster_roadm node1_to_fiber (node1 -> siteC)-",
+      "to_node": "fiber (node1 -> siteC)-"
+    },
+    {
+      "from_node": "Edfa_booster_roadm node1_to_fiber (node1 -> siteA)-_(1/4)",
+      "to_node": "fiber (node1 -> siteA)-_(1/4)"
+    },
+    {
+      "from_node": "Edfa_preamp_roadm node2_from_fiber (siteF -> node2)-CABLES#21",
+      "to_node": "roadm node2"
+    },
+    {
+      "from_node": "Edfa_preamp_roadm node2_from_fiber (siteE -> node2)-CABLES#22",
+      "to_node": "roadm node2"
+    },
+    {
+      "from_node": "Edfa_preamp_roadm node2_from_fiber (siteB -> node2)-",
+      "to_node": "roadm node2"
+    },
+    {
+      "from_node": "Edfa_preamp_roadm node2_from_fiber (siteC -> node2)-",
+      "to_node": "roadm node2"
+    },
+    {
+      "from_node": "Edfa_booster_roadm node2_to_fiber (node2 -> siteF)-CABLES#21",
+      "to_node": "fiber (node2 -> siteF)-CABLES#21"
+    },
+    {
+      "from_node": "Edfa_booster_roadm node2_to_fiber (node2 -> siteE)-CABLES#22",
+      "to_node": "fiber (node2 -> siteE)-CABLES#22"
+    },
+    {
+      "from_node": "Edfa_booster_roadm node2_to_fiber (node2 -> siteB)-",
+      "to_node": "fiber (node2 -> siteB)-"
+    },
+    {
+      "from_node": "Edfa_booster_roadm node2_to_fiber (node2 -> siteC)-",
+      "to_node": "fiber (node2 -> siteC)-"
+    },
+    {
+      "from_node": "Edfa_fiber (node1 -> siteA)-_(1/4)",
+      "to_node": "fiber (node1 -> siteA)-_(2/4)"
+    },
+    {
+      "from_node": "Edfa_fiber (node1 -> siteA)-_(2/4)",
+      "to_node": "fiber (node1 -> siteA)-_(3/4)"
+    },
+    {
+      "from_node": "Edfa_fiber (node1 -> siteA)-_(3/4)",
+      "to_node": "fiber (node1 -> siteA)-_(4/4)"
+    },
+    {
+      "from_node": "Edfa_fiber (siteA -> siteB)-_(1/4)",
+      "to_node": "fiber (siteA -> siteB)-_(2/4)"
+    },
+    {
+      "from_node": "Edfa_fiber (siteA -> siteB)-_(2/4)",
+      "to_node": "fiber (siteA -> siteB)-_(3/4)"
+    },
+    {
+      "from_node": "Edfa_fiber (siteA -> siteB)-_(3/4)",
+      "to_node": "fiber (siteA -> siteB)-_(4/4)"
+    },
+    {
+      "from_node": "Edfa_fiber (siteA -> node1)-_(1/4)",
+      "to_node": "fiber (siteA -> node1)-_(2/4)"
+    },
+    {
+      "from_node": "Edfa_fiber (siteA -> node1)-_(2/4)",
+      "to_node": "fiber (siteA -> node1)-_(3/4)"
+    },
+    {
+      "from_node": "Edfa_fiber (siteA -> node1)-_(3/4)",
+      "to_node": "fiber (siteA -> node1)-_(4/4)"
+    },
+    {
+      "from_node": "Edfa_fiber (siteB -> siteA)-_(1/4)",
+      "to_node": "fiber (siteB -> siteA)-_(2/4)"
+    },
+    {
+      "from_node": "Edfa_fiber (siteB -> siteA)-_(2/4)",
+      "to_node": "fiber (siteB -> siteA)-_(3/4)"
+    },
+    {
+      "from_node": "Edfa_fiber (siteB -> siteA)-_(3/4)",
+      "to_node": "fiber (siteB -> siteA)-_(4/4)"
+    }
+  ]
+}

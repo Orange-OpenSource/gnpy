@@ -64,7 +64,8 @@ def pathrequest(pch_dbm: float, p_tot_dbm: float = None, nb_channels: int = None
     DATA_DIR / 'CORONET_Global_Topology.xlsx': DATA_DIR / 'CORONET_Global_Topology_expected.json',
     DATA_DIR / 'testTopology.xls': DATA_DIR / 'testTopology_expected.json',
     DATA_DIR / 'perdegreemeshTopologyExampleV2.xls': DATA_DIR / 'perdegreemeshTopologyExampleV2_expected.json',
-    DATA_DIR / 'parallel_omses/parallel_links.xlsx': DATA_DIR / 'parallel_omses/parallel_links_expected.json'
+    DATA_DIR / 'parallel_omses/parallel_links.xlsx': DATA_DIR / 'parallel_omses/parallel_links_expected.json',
+    DATA_DIR / 'parallel_omses/2routes.xlsx': DATA_DIR / 'parallel_omses/2routes_expected.json'
 
 }.items())
 def test_excel_json_generation(tmpdir, xls_input, expected_json_output):
@@ -87,6 +88,8 @@ def test_excel_json_generation(tmpdir, xls_input, expected_json_output):
                           DATA_DIR / 'CORONET_Global_Topology_auto_design_expected.json',
                           DATA_DIR / 'testTopology.xls':
                           DATA_DIR / 'testTopology_auto_design_expected.json',
+                          DATA_DIR / 'parallel_omses/2routes.xlsx':
+                          DATA_DIR / 'parallel_omses/2routes_autodesign_expected.json'
                           }.items())
 def test_auto_design_generation_fromxlsgainmode(tmpdir, xls_input, expected_json_output):
     """tests generation of topology json and that the build network gives correct results in gain mode"""

@@ -1,0 +1,151 @@
+INFO     gnpy.tools.cli_examples:cli_examples.py Computing path requests 2routes.xlsx into JSON format
+WARNING  gnpy.tools.json_io:json_io.py 
+	WARNING missing type_variety attribute in eqpt_config.json[Roadm]
+	default value is type_variety = default
+
+WARNING  gnpy.tools.convert:convert.py missing header delta p
+WARNING  gnpy.tools.convert:convert.py missing header delta p
+WARNING  gnpy.tools.convert:convert.py missing header type_variety
+WARNING  gnpy.tools.convert:convert.py missing header from degrees
+WARNING  gnpy.tools.convert:convert.py missing header from degree to degree impairment id
+INFO     gnpy.core.network:network.py 
+Reference used for design: (Input optical power reference in span = 0.00dBm
+                            spacing = 50.000GHz
+                            nb_channels = 76
+INFO     gnpy.tools.json_io:json_io.py Automatically converting requests from XLS to JSON
+WARNING  gnpy.tools.convert:convert.py missing header delta p
+WARNING  gnpy.tools.convert:convert.py missing header delta p
+WARNING  gnpy.tools.convert:convert.py missing header type_variety
+WARNING  gnpy.tools.convert:convert.py missing header from degrees
+WARNING  gnpy.tools.convert:convert.py missing header from degree to degree impairment id
+INFO     gnpy.tools.service_sheet:service_sheet.py main: Invalid route node specified:
+	'node1', replaced with 'roadm node1'
+INFO     gnpy.tools.service_sheet:service_sheet.py main: Invalid route node specified:
+	'siteE', replaced with 'west edfa in siteE'
+INFO     gnpy.tools.service_sheet:service_sheet.py main: Invalid route node specified:
+	'node2', replaced with 'roadm node2'
+INFO     gnpy.tools.service_sheet:service_sheet.py prot: Invalid route node specified:
+	'node1', replaced with 'roadm node1'
+INFO     gnpy.tools.service_sheet:service_sheet.py prot: Invalid route node specified:
+	'siteF', replaced with 'west edfa in siteF'
+INFO     gnpy.tools.service_sheet:service_sheet.py prot: Invalid route node specified:
+	'node2', replaced with 'roadm node2'
+INFO     gnpy.tools.service_sheet:service_sheet.py 3: Invalid route node specified:
+	'node1', replaced with 'roadm node1'
+INFO     gnpy.tools.service_sheet:service_sheet.py 3: Invalid route node specified:
+	'siteA', replaced with 'west edfa in siteA'
+INFO     gnpy.tools.service_sheet:service_sheet.py 3: Invalid route specified siteB: could not decide on direction, skipped!.
+Please add a valid direction in constraints (next neighbour node)
+INFO     gnpy.tools.service_sheet:service_sheet.py 4: Invalid route node specified:
+	'node1', replaced with 'roadm node1'
+INFO     gnpy.tools.service_sheet:service_sheet.py 4: Invalid route node specified:
+	'siteC', replaced with 'east edfa in siteC'
+INFO     gnpy.tools.service_sheet:service_sheet.py 4: Invalid route node specified:
+	'node2', replaced with 'roadm node2'
+INFO     gnpy.tools.service_sheet:service_sheet.py 5: Invalid route node specified:
+	'node1', replaced with 'roadm node1'
+INFO     gnpy.tools.service_sheet:service_sheet.py 5: Invalid route node specified:
+	'siteD', replaced with 'west edfa in siteD to node1'
+INFO     gnpy.tools.service_sheet:service_sheet.py 5: Invalid route node specified:
+	'node2', replaced with 'roadm node2'
+INFO     gnpy.tools.worker_utils:worker_utils.py List of disjunctions:
+[]
+INFO     gnpy.tools.worker_utils:worker_utils.py Aggregating similar requests
+INFO     gnpy.tools.worker_utils:worker_utils.py The following services have been requested:
+[PathRequest main
+	source: 	trx node1
+	destination:	trx node2
+	trx type:	Voyager
+	trx mode:	None
+	baud_rate:	None Gbaud
+	bit_rate:	None Gb/s
+	spacing:	100.0 GHz
+	power:  	0.0 dBm
+	tx_power_dbm:  	0.0 dBm
+	nb channels: 	48
+	path_bandwidth: 	100.0 Gbit/s
+	nodes-list:	['roadm node1', 'west edfa in siteE', 'roadm node2']
+	loose-list:	['STRICT', 'STRICT', 'STRICT']
+, PathRequest prot
+	source: 	trx node1
+	destination:	trx node2
+	trx type:	Voyager
+	trx mode:	None
+	baud_rate:	None Gbaud
+	bit_rate:	None Gb/s
+	spacing:	100.0 GHz
+	power:  	0.0 dBm
+	tx_power_dbm:  	0.0 dBm
+	nb channels: 	48
+	path_bandwidth: 	100.0 Gbit/s
+	nodes-list:	['roadm node1', 'west edfa in siteF', 'roadm node2']
+	loose-list:	['STRICT', 'STRICT', 'STRICT']
+, PathRequest 3
+	source: 	trx node1
+	destination:	trx node2
+	trx type:	Voyager
+	trx mode:	None
+	baud_rate:	None Gbaud
+	bit_rate:	None Gb/s
+	spacing:	100.0 GHz
+	power:  	0.0 dBm
+	tx_power_dbm:  	0.0 dBm
+	nb channels: 	48
+	path_bandwidth: 	100.0 Gbit/s
+	nodes-list:	['roadm node1', 'west edfa in siteA']
+	loose-list:	['LOOSE', 'LOOSE']
+, PathRequest 4
+	source: 	trx node1
+	destination:	trx node2
+	trx type:	Voyager
+	trx mode:	None
+	baud_rate:	None Gbaud
+	bit_rate:	None Gb/s
+	spacing:	100.0 GHz
+	power:  	0.0 dBm
+	tx_power_dbm:  	0.0 dBm
+	nb channels: 	48
+	path_bandwidth: 	100.0 Gbit/s
+	nodes-list:	['roadm node1', 'east edfa in siteC', 'roadm node2']
+	loose-list:	['LOOSE', 'LOOSE', 'LOOSE']
+, PathRequest 5
+	source: 	trx node1
+	destination:	trx node2
+	trx type:	Voyager
+	trx mode:	None
+	baud_rate:	None Gbaud
+	bit_rate:	None Gb/s
+	spacing:	100.0 GHz
+	power:  	0.0 dBm
+	tx_power_dbm:  	0.0 dBm
+	nb channels: 	48
+	path_bandwidth: 	100.0 Gbit/s
+	nodes-list:	['roadm node1', 'west edfa in siteD to node1', 'roadm node2']
+	loose-list:	['LOOSE', 'LOOSE', 'LOOSE']
+]
+INFO     gnpy.tools.worker_utils:worker_utils.py Propagating on selected path
+INFO     gnpy.topology.request:request.py 
+	request main
+	Computing path from trx node1 to trx node2
+	with path constraint: ['trx node1', 'roadm node1', 'west edfa in siteE', 'roadm node2', 'trx node2']
+	Computed path (roadms): ['roadm node1', 'roadm node2']
+INFO     gnpy.topology.request:request.py 
+	request prot
+	Computing path from trx node1 to trx node2
+	with path constraint: ['trx node1', 'roadm node1', 'west edfa in siteF', 'roadm node2', 'trx node2']
+	Computed path (roadms): ['roadm node1', 'roadm node2']
+INFO     gnpy.topology.request:request.py 
+	request 3
+	Computing path from trx node1 to trx node2
+	with path constraint: ['trx node1', 'roadm node1', 'west edfa in siteA', 'trx node2']
+	Computed path (roadms): ['roadm node1', 'roadm node2']
+INFO     gnpy.topology.request:request.py 
+	request 4
+	Computing path from trx node1 to trx node2
+	with path constraint: ['trx node1', 'roadm node1', 'east edfa in siteC', 'roadm node2', 'trx node2']
+	Computed path (roadms): ['roadm node1', 'roadm node2']
+INFO     gnpy.topology.request:request.py 
+	request 5
+	Computing path from trx node1 to trx node2
+	with path constraint: ['trx node1', 'roadm node1', 'west edfa in siteD to node1', 'roadm node2', 'trx node2']
+	Computed path (roadms): ['roadm node1', 'roadm node2']
