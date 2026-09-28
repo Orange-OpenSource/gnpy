@@ -951,3 +951,15 @@ def array_contains_infinite_value(my_array: Union[List, array]) -> bool:
     :rtype: bool
     """
     return any(isinf(i) for i in my_array)
+
+
+def _format_items(items: list[str]):
+    """Format a list of items into a string.
+
+    :param items: A list of items to format.
+    :return: A formatted string with each item on a new line.
+    """
+    items = list(items)
+    if len(items[0]) == 2:
+        return '\n'.join(f' - {item[0]} -> {item[1]}' for item in items)
+    return '\n'.join(f' - {item}' for item in items)

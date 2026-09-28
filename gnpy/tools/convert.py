@@ -35,7 +35,7 @@ from copy import copy, deepcopy
 from typing import Generator, Tuple, List, Dict, DefaultDict, Union, Optional
 from networkx import DiGraph
 
-from gnpy.core.utils import silent_remove, transform_data, convert_pmd_lineic
+from gnpy.core.utils import silent_remove, transform_data, convert_pmd_lineic, _format_items
 from gnpy.core.exceptions import NetworkTopologyError
 from gnpy.core.elements import Edfa, Fused, Fiber
 from gnpy.tools.xls_utils import SheetType, all_rows, generic_open_workbook, get_row_slice, get_sheet, \
@@ -414,20 +414,6 @@ def parse_sheet(my_sheet: SheetType, is_xlsx: bool, input_headers_dict: Dict, he
             # Check required because openpyxl in read_only mode can return "ghost" rows at the end of the document
             # (ReadOnlyCell cells with no actual value but formatting information even for empty rows).
             yield parse_row(row[0: column], headers)
-
-
-def _format_items(items: List[str]):
-    """Format a list of items into a string.
-
-    :param items: A list of items to format.
-    :type items: List[str]
-    :return: A formatted string with each item on a new line.
-    :rtype: str
-    """
-    items = list(items)
-    if len(items[0]) == 2:
-        return '\n'.join(f' - {item[0]} -> {item[1]}' for item in items)
-    return '\n'.join(f' - {item}' for item in items)
 
 
 def sanity_check(nodes: List[Node], links: List[Link], roadms: List[Roadm],

@@ -25,7 +25,7 @@ from gnpy.core import elements
 from gnpy.core.equipment import find_type_variety, find_type_varieties
 from gnpy.core.exceptions import ConfigurationError, NetworkTopologyError
 from gnpy.core.utils import round2float, convert_length, psd2powerdbm, lin2db, watt2dbm, dbm2watt, automatic_nch, \
-    find_common_range, get_spacing_from_band, reorder_per_degree_design_bands
+    find_common_range, get_spacing_from_band, reorder_per_degree_design_bands, _format_items
 from gnpy.core.info import ReferenceCarrier, create_input_spectral_information
 from gnpy.core.parameters import SimParams, EdfaParams, find_band_name, FrequencyBand, MultiBandParams
 from gnpy.core.science_utils import RamanSolver
@@ -2150,12 +2150,21 @@ def add_missing_elements_in_network(network: DiGraph, equipment: dict):
     for fiber in fibers:
         split_fiber(network, fiber, bounds, target_length)
     roadms = [r for r in network.nodes() if isinstance(r, elements.Roadm)]
+    collect_errors = []
     for roadm in roadms:
-        add_roadm_preamp(network, roadm)
-        add_roadm_booster(network, roadm)
+        try:
+            add_roadm_preamp(network, roadm)
+            add_roadm_booster(network, roadm)
+        except NetworkTopologyError as e:
+            collect_errors.append(e.args)
     fibers = [f for f in network.nodes() if isinstance(f, elements.Fiber)]
     for fiber in fibers:
-        add_inline_amplifier(network, fiber)
+        try:
+            add_inline_amplifier(network, fiber)
+        except NetworkTopologyError as e:
+            collect_errors.append(e.args)
+    if collect_errors:
+        raise NetworkTopologyError(_format_items(collect_errors))
 
 
 def add_missing_fiber_attributes(network: DiGraph, equipment: dict):
@@ -2180,8 +2189,19 @@ def add_missing_fiber_attributes(network: DiGraph, equipment: dict):
     fibers = [f for f in network.nodes() if isinstance(f, elements.Fiber)]
     add_connector_loss(network, fibers, default_span_data.con_in, default_span_data.con_out, default_span_data.EOL)
     # don't add padding on dark fibers to external transceivers
-    fibers = [f for f in network.nodes() if isinstance(f, elements.Fiber)
-              and has_roadm_in_predecessors(f, network) and has_roadm_in_successors(f, network)]
+    collect_errors = []
+    try:
+        fibers = [f for f in network.nodes() if isinstance(f, elements.Fiber)
+                  and has_roadm_in_predecessors(f, network) and has_roadm_in_successors(f, network)]
+    except NetworkTopologyError:
+        for node in network.nodes():
+            try:
+                has_roadm_in_predecessors(node, network)
+                has_roadm_in_successors(node, network)
+            except NetworkTopologyError as e:
+                collect_errors.append(e.args)
+    if collect_errors:
+        raise NetworkTopologyError(_format_items(collect_errors))
     add_fiber_padding(network, fibers, default_span_data.padding, equipment)
 
 
