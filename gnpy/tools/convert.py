@@ -953,7 +953,83 @@ def convert_file(input_filename: Path, filter_region: List[str] = None, output_j
     return output_json_file_name
 
 
-def corresp_names(input_filename: Path, network: DiGraph) -> Tuple[dict, dict, dict]:
+def _match_uid(name: str, uid_list: List[str]) -> Optional[str]:
+    """Return the first uid in uid_list that contains name as a substring.
+
+    Fiber splitting may add a numeric suffix to the uid generated from the
+    Excel-based name, hence the substring (prefix) matching instead of an
+    exact match.
+
+    :param name: Excel-based name to look for.
+    :type name: str
+    :param uid_list: list of uids to search into.
+    :type uid_list: List[str]
+    :return: the first matching uid, or None.
+    :rtype: Optional[str]
+    """
+    return next((uid for uid in uid_list if name in uid), None)
+
+
+def _add_eqpt_fused_names(eqpts: List[Eqpt], fused: List[str], corresp_fused: Dict[str, List[str]]) -> None:
+    """Register ILA nodes turned into Fused elements via the Eqpt sheet
+    ('fused' amp type on a node declared as ILA in the Nodes sheet).
+    Updates corresp_fused in place.
+    """
+    for eqpt in eqpts:
+        for direction in ('east', 'west'):
+            amp_type = getattr(eqpt, f'{direction}_amp_type')
+            name = f'{direction} edfa in {eqpt.from_city} to {eqpt.to_city}{pair_string(eqpt)}'
+            if amp_type.lower() == 'fused' and name in fused:
+                # setdefault, and NOT .get(), so that the entry is actually created
+                # in corresp_fused when the city was not already a 'fused' node
+                corresp_fused.setdefault(eqpt.from_city, []).append(name)
+
+
+def _add_ila_names_from_eqpt(eqpts: List[Eqpt], edfa_uids: List[str], corresp_ila: DefaultDict[str, list]) -> None:
+    """Complete corresp_ila with explicit ILA names defined in the Eqpt sheet."""
+    for eqpt in eqpts:
+        for direction in ('east', 'west'):
+            name = f'{direction} edfa in {eqpt.from_city} to {eqpt.to_city}{pair_string(eqpt)}'
+            match = _match_uid(name, edfa_uids)
+            if match:
+                corresp_ila[eqpt.from_city].append(match)
+
+
+def _add_ila_names_from_links(links: List[Link], edfa_uids: List[str], corresp_ila: DefaultDict[str, list]) -> None:
+    """Complete corresp_ila with autodesign booster/preamp names generated for ROADM
+    degrees (equivalent naming used when the Eqpt sheet does not define the node).
+    """
+    for link in links:
+        candidates = [
+            (link.from_city, [
+                f'Edfa_preamp_roadm {link.from_city}_from_fiber ({link.to_city} -> {link.from_city})'
+                f'-{link.west_cable}{pair_string(link)}',
+                f'Edfa_booster_roadm {link.from_city}_to_fiber ({link.from_city} -> {link.to_city})'
+                f'-{link.east_cable}{pair_string(link)}']),
+            (link.to_city, [
+                f'Edfa_preamp_roadm {link.to_city}_from_fiber ({link.from_city} -> {link.to_city})'
+                f'-{link.east_cable}{pair_string(link)}',
+                f'Edfa_booster_roadm {link.to_city}_to_fiber ({link.to_city} -> {link.from_city})'
+                f'-{link.west_cable}{pair_string(link)}']),
+        ]
+        for city, names in candidates:
+            for name in names:
+                match = _match_uid(name, edfa_uids)
+                if match:
+                    corresp_ila[city].append(match)
+
+
+def _add_ila_names_from_nodes(nodes: List[Node], edfa_uids: List[str], corresp_ila: DefaultDict[str, list]) -> None:
+    """Complete corresp_ila with ILA names for nodes not described in the Eqpt sheet."""
+    for node in nodes:
+        for direction in ('east', 'west'):
+            name = f'{direction} edfa in {node.city}{pair_string(node)}'
+            match = _match_uid(name, edfa_uids)
+            if match:
+                corresp_ila[node.city].append(match)
+
+
+def corresp_names(input_filename: Path, network: DiGraph):
     """Build the correspondence between names given in the Excel and names used in the JSON.
 
     :param input_filename: The path to the input XLS file.
@@ -966,72 +1042,25 @@ def corresp_names(input_filename: Path, network: DiGraph) -> Tuple[dict, dict, d
     nodes, links, eqpts, roadms = parse_excel(input_filename)
     assign_implicit_pair_ids(nodes, links, eqpts, roadms)
     fused = [n.uid for n in network.nodes() if isinstance(n, Fused)]
-    ila = [n.uid for n in network.nodes() if isinstance(n, Edfa)]
+    edfa_uids = [n.uid for n in network.nodes() if isinstance(n, Edfa)]
 
-    corresp_roadm = {x.city: [f'roadm {x.city}'] for x in nodes
-                     if x.node_type.lower() == 'roadm'}
-    corresp_fused = {x.city: [f'west fused spans in {x.city}{pair_string(x)}',
-                              f'east fused spans in {x.city}{pair_string(x)}']
-                     for x in nodes if x.node_type.lower() == 'fused'
-                     and f'west fused spans in {x.city}{pair_string(x)}' in fused
-                     and f'east fused spans in {x.city}{pair_string(x)}' in fused}
+    corresp_roadm = {x.city: [f'roadm {x.city}'] for x in nodes if x.node_type.lower() == 'roadm'}
+    corresp_fused = {
+        x.city: [f'west fused spans in {x.city}{pair_string(x)}', f'east fused spans in {x.city}{pair_string(x)}']
+        for x in nodes if x.node_type.lower() == 'fused'
+        and f'west fused spans in {x.city}{pair_string(x)}' in fused
+        and f'east fused spans in {x.city}{pair_string(x)}' in fused
+    }
+    _add_eqpt_fused_names(eqpts, fused, corresp_fused)
+
     corresp_ila = defaultdict(list)
-    # add the special cases when an ila is changed into a fused
-    for my_e in eqpts:
-        name = f'east edfa in {my_e.from_city} to {my_e.to_city}{pair_string(my_e)}'
-        if my_e.east_amp_type.lower() == 'fused' and name in fused:
-            corresp_fused.get(my_e.from_city, []).append(name)
-        name = f'west edfa in {my_e.from_city} to {my_e.to_city}{pair_string(my_e)}'
-        if my_e.west_amp_type.lower() == 'fused' and name in fused:
-            corresp_fused.get(my_e.from_city, []).append(name)
-    # build corresp ila based on eqpt sheet
-    # start with east direction
-    for my_e in eqpts:
-        for name in [f'east edfa in {my_e.from_city} to {my_e.to_city}{pair_string(my_e)}',
-                     f'west edfa in {my_e.from_city} to {my_e.to_city}{pair_string(my_e)}']:
-            for element in ila:
-                if name in element:
-                    corresp_ila[my_e.from_city].append(element)
-    # complete with potential autodesign names: amplifiers
-    for my_l in links:
-        # create names whatever the type and filter them out
-        # from-to direction
-        names = [
-            f'Edfa_preamp_roadm {my_l.from_city}_from_fiber ({my_l.to_city} -> {my_l.from_city})-{my_l.west_cable}{pair_string(my_e)}',  # noqa E501
-            f'Edfa_booster_roadm {my_l.from_city}_to_fiber ({my_l.from_city} -> {my_l.to_city})-{my_l.east_cable}{pair_string(my_e)}']   # noqa E501
-        for name in names:
-            for element in ila:
-                if name in element:
-                    # "east edfa in Stbrieuc to Rennes_STA"  is equivalent name as
-                    # "Edfa_booster_roadm Stbrieuc_to_fiber (Lannion_CAS → Stbrieuc)-F056"
-                    # "west edfa in Stbrieuc to Rennes_STA"  is equivalent name as
-                    # "Edfa_preamp_roadm Stbrieuc_to_fiber (Rennes_STA → Stbrieuc)-F057"
-                    # in case fibers are splitted the name here is a prefix
-                    corresp_ila[my_l.from_city].append(element)
-                    break
-        # to-from direction
-        names = [f'Edfa_preamp_roadm {my_l.to_city}_from_fiber ({my_l.from_city} -> {my_l.to_city})-{my_l.east_cable}{pair_string(my_e)}',  # noqa E501
-                 f'Edfa_booster_roadm {my_l.to_city}_to_fiber ({my_l.to_city} -> {my_l.from_city})-{my_l.west_cable}{pair_string(my_e)}']   # noqa E501
-        for name in names:
-            for element in ila:
-                if name in element:
-                    corresp_ila[my_l.to_city].append(element)
-                    break
-    for node in nodes:
-        names = [f'east edfa in {node.city}{pair_string(node)}', f'west edfa in {node.city}{pair_string(node)}']
-        for name in names:
-            for element in ila:
-                if name in element:
-                    # "east edfa in Stbrieuc to Rennes_STA" (created with Eqpt) is equivalent name as
-                    # "east edfa in Stbrieuc" or "west edfa in Stbrieuc" (created with Links sheet)
-                    # depending on link node order
-                    corresp_ila[node.city].append(element)
-                    break
+    _add_ila_names_from_eqpt(eqpts, edfa_uids, corresp_ila)
+    _add_ila_names_from_links(links, edfa_uids, corresp_ila)
+    _add_ila_names_from_nodes(nodes, edfa_uids, corresp_ila)
 
-    # merge fused with ila:
+    # merge fused with ila: no need of roadm booster
     for key, val in corresp_fused.items():
         corresp_ila[key].extend(val)
-        # no need of roadm booster
     return corresp_roadm, corresp_fused, corresp_ila
 
 
